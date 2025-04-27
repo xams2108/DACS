@@ -1,4 +1,4 @@
-const Controller = require("../controller/cryptocurrency.controller")
+const Controller = require("../controller/chart/cryptocurrency.controller")
 const express = require("express")
 const router = express.Router()
 

@@ -1,5 +1,6 @@
-const Symbols = require("../model/symbol.model");
+const Symbols = require("../../model/symbol.model");
 const axios = require('axios');
+const { updateCandle } = require("./ws.updateCandle")
 // GET Symbols
 module.exports.index = async (req, res) => {
     try {
@@ -45,14 +46,14 @@ module.exports.chart = async(req,res)  => {
     let interval = "1d";
     let limit = 100;
     if(!symbol){
-        res.status.json({
+        res.status(400).json({
             message: 'không có symbol',
         })
         return 
     }
-    exitsSymbol = Symbols.findOne({symbol: symbol})
+    exitsSymbol = await Symbols.findOne({symbol: symbol})
     if(!exitsSymbol){
-        res.status.json({
+        res.status(400).json({
             message: 'Symbol không tồn tại',
         })
         return 
@@ -62,8 +63,9 @@ module.exports.chart = async(req,res)  => {
         interval = req.query.interval
     }
     if(req.query.limit){
-        limit = parseInt(req.query.interval)
+        limit = parseInt(req.query.limit)
     }
+    
     try{
         const response = await axios.get(`https://api.binance.com/api/v3/klines`, {
             params: {
@@ -90,6 +92,8 @@ module.exports.chart = async(req,res)  => {
             success: true,
             data: priceHistory
         });
+        updateCandle(symbol, interval,)
+        
     }catch (error){
         res.status(500).json({
             success: false,
