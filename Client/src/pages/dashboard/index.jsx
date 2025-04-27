@@ -2,6 +2,7 @@ import { Col, Row } from 'antd';
 import CartItem from '../../components/cardItem';
 import TopCoin from './topcoin'
 import Trending from './trending'
+import News from './news'
 function Dashboard() {
 
    
@@ -14,7 +15,7 @@ function Dashboard() {
                 <Trending/>
             </Col>
             <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                
+                <News/>
             </Col>
         </Row>
         <Row gutter={[20,20]} className='mt-20'>

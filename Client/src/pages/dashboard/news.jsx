@@ -1,7 +1,10 @@
+
+import BoxNews from '../../components/boxNews'
 function news() { 
     return (
         <>  
-            <BoxCoin/>
+            <BoxNews></BoxNews>
+            
         </>
     );
 }
