@@ -12,6 +12,7 @@ app.use(cors())
  
 //cho phép lưu cookie
 app.use(cookieParser())
+
 //gửi json từ client
 app.use(bodyparse.json())
 

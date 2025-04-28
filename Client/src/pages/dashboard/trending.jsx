@@ -1,5 +1,5 @@
 
-import BoxTrending from '../../components/boxTrending'
+import BoxTrending from '../../components/danshboard/boxTrending'
 
 function trending() {
 

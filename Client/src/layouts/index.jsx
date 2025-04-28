@@ -2,7 +2,6 @@ import {Layout } from 'antd';
 import Notify from '../components/notify'
 import MenuSider from '../components/menuSider';
 import ConnectWallet from '../components/connectwallet'
-import CoinTrending from '../components/coinTrending'
 import { MenuFoldOutlined,MenuUnfoldOutlined } from '@ant-design/icons'
 import './layoutDefault.scss'
 import { useState } from 'react';
@@ -25,11 +24,7 @@ function LayoutDefault() {
                             {collapsed ? <MenuUnfoldOutlined/>:<MenuFoldOutlined />}
                             
                         </div>
-                        <div className='coin-trending' >
-                            <CoinTrending/>
-                        </div>
-                        
-                        
+                       
                     </div>
                     <div className='header__nav__right'>
                         <Notify/>

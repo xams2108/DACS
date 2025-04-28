@@ -1,0 +1,19 @@
+.ListSymbol {
+    display: flex;
+    flex-direction: column; 
+    background-color: #fff;
+    border-radius: 8px;
+    height: 100%;
+    overflow-x: auto;
+
+    &__item {
+        padding: 10px;
+        border-radius: 1px so;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        &:hover {
+            background-color: #f8f8f8;
+        }
+    }
+    
+}

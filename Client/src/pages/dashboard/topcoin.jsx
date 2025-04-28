@@ -1,5 +1,5 @@
 
-import BoxCoin from "../../components/boxCoin"
+import BoxCoin from "../../components/danshboard/boxCoin"
 function topCoin() { 
     return (
         <>  

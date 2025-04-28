@@ -7,21 +7,11 @@ module.exports.index = async (req, res) => {
         const find = {
             status: "TRADING"
         };
-        if (req.query.search) {
+        if (req.query.search && req.query.search.trim() !== "") {
             const searchRegex = new RegExp(req.query.search, 'i'); 
             find.symbol = { $regex: searchRegex }; 
         }
-        if(req.query.symbol){
-            find.symbol = req.query.symbol;
-        }
-        if (req.query.baseAsset) {
-            find.baseAsset = req.query.baseAsset; 
-        }
-        if (req.query.quoteAsset) {
-            find.quoteAsset = req.query.quoteAsset; 
-        }
-
-        let limit = 20; 
+        let limit = 30; 
         if (req.query.limit) {
             limit = parseInt(req.query.limit);
         }

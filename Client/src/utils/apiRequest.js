@@ -1,4 +1,4 @@
-const API_URL = ''; 
+const API_URL = 'http://localhost:2108'; 
 
 const handleRequest = async (method, endpoint, data = null) => {
     const options = {

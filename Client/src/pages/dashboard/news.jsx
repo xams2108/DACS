@@ -1,5 +1,5 @@
 
-import BoxNews from '../../components/boxNews'
+import BoxNews from '../../components/danshboard/boxNews'
 function news() { 
     return (
         <>  
