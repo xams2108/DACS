@@ -1,15 +1,18 @@
 import CartItem  from "../../../components/cardItem";
 import { Col, Row,Flex} from 'antd';
 import BoxSearch from "../../../components/market/cryptocurrency/boxSearch";
+import BoxChart from "../../../components/market/cryptocurrency/boxChart";
 function Cryptocurrency () {
     return(
         <>
             <Row gutter={[25,30]} className='mt-20'>
-                        <Col xxl={5} xl={5} lg={5} md={24} sm={24} xs={24}>
+                        <Col xxl={4} xl={4} lg={4} md={24} sm={24} xs={24}>
                             <BoxSearch />
                         </Col>
-                        <Col xxl={14} xl={14} lg={14} md={24} sm={24} xs={24} >
-                            <CartItem height={550}/>
+                        <Col xxl={15} xl={15} lg={15} md={24} sm={24} xs={24} >
+                           <cartItem height={500}> 
+                                <BoxChart />
+                           </cartItem>
                         </Col>
                         <Col xxl={5} xl={5} lg={5} md={24} sm={24} xs={24}>
                             <Flex vertical={true}>

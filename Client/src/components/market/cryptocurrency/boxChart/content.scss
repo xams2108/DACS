@@ -1,0 +1,19 @@
+.BoxToolTip {
+    position: absolute; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    border: 1px solid #cccccc; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none; 
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    visibility: hidden; 
+  
+
+    &.visible {
+      opacity: 1;
+      z-index: 2; 
+      visibility: visible;
+    }
+  }
