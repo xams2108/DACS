@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+
 import './Header.scss';
+import { useChartProvider } from '../../../../providers/chartProvider';
 
 function Header() {
-  const [interval, setInterval] = useState('15M');
-  const listInterval = ['1M', '15M', '30M', '1D', '1W', '1MO', '3MO', '1Y'];
+  const {symbol,interval,setInterval } = useChartProvider();
+  const listInterval = [
+    '1m',   // 1 phút
+    '5m',   // 5 phút
+    '15m',  // 15 phút
+    '30m',  // 30 phút
+    '1h',   // 1 giờ
+    '4h',   // 4 giờ
+    '1d',   // 1 ngày
+    '1w',   // 1 tuần
+    '1M',   // 1 tháng (30 ngày)
+    '3M',   // 3 tháng (Quý)
+    '1y'    // 1 năm
+];
 
   const handleInterval = (item) => {
     setInterval(item);
@@ -12,7 +25,7 @@ function Header() {
   return (
     <div className="chart-header">
       <div className="chart-header__left">
-        <div className="chart-header__left__title">BTC / USDT</div>
+        <div className="chart-header__left__title">{symbol}</div>
       </div>
       <div className="chart-header__right">
         {listInterval.map((item, index) => (

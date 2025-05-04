@@ -1,12 +1,13 @@
 import Header from "./chartHeader";
 import Content from "./chartContent"
-function boxChart() {
+function BoxChart() {
+
   return (
       
     <div className="box-chart">
       <Header />
-      <Content />
+      <Content/>
     </div>
   );
 }
-export default boxChart;
+export default BoxChart;

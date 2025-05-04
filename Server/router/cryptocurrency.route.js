@@ -3,5 +3,5 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", Controller.index)
-router.get("/chart", Controller.chart)
+router.get("/chart/:symbol/:interval", Controller.chart)
 module.exports = router 

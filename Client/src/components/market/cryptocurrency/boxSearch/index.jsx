@@ -3,15 +3,18 @@ import Card from "../../../cardItem";
 import { useEffect, useState } from "react";
 import './index.scss';
 import getCoins from "../../../../services/api/getCoins.api";
+import { useChartProvider } from "../../../../providers/chartProvider";
 
 const { Search } = Input;
 const { Text } = Typography;
 
 function BoxSearch() {
+    const { symbol, setSymbol} = useChartProvider();
+    console.log("symbol", symbol);
     const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(false);
     const [listCoins, setListCoin] = useState([]);
-
+    
     useEffect(() => {
         const fetchApi = async () => {
             setLoading(true);
@@ -21,7 +24,9 @@ function BoxSearch() {
         };
         fetchApi(); 
     }, [searchText]);
-
+    function handleSymbol(symbol) {
+        setSymbol(symbol);
+    }
     const handleSearch = (value) => {
         setSearchText(value);
     };
@@ -47,7 +52,7 @@ function BoxSearch() {
                     <Card height={470}>
                         <div className="ListSymbol">
                             {listCoins.map((coin) => (
-                                <div className="ListSymbol__item" key={coin.symbol}>
+                                <div className="ListSymbol__item" key={coin.symbol} onClick={() => handleSymbol(coin.symbol)}>
                                     <span>{coin.baseAsset}/{coin.quoteAsset}</span>
                                 </div>
                             ))}

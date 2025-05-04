@@ -2,7 +2,7 @@ import './BoxCoin.scss';
 import { Button, Tag  } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
-import usePriceCoin from '../../../services/websocket/getPriceCoin'; 
+import usePriceCoin from "../../../hooks/usePriceCoin"; 
 
 function BoxCoin({ title, icon, bgColor}) {
     const priceData = usePriceCoin(title.toLowerCase() + 'usdt'); 

@@ -1,7 +1,7 @@
-$primary-bg: #ffffff; // Soft white background
-$accent-color: #007bff; // Professional blue for active state
-$text-color: #333333; // Dark text for contrast
-$secondary-bg: #e9ecef; // Light gray for interval buttons
+$primary-bg: #ffffff; 
+$accent-color: #007bff;
+$text-color: #333333; 
+$secondary-bg: #e9ecef;
 $border-radius: 5px;
 $spacing: 10px;
 $transition: all 0.3s ease;
@@ -10,17 +10,16 @@ $transition: all 0.3s ease;
   display: flex;
   align-items: center;
   background-color: $primary-bg;
-  padding: calc(#{$spacing} / 2) calc(#{$spacing}); // Sử dụng calc()
+  padding: calc(#{$spacing} / 2) calc(#{$spacing}); 
   border-radius: $border-radius;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
   font-family: 'Inter', sans-serif;
 
-  // Element: chart-header__left
+
   &__left {
     display: flex;
     align-items: center;
 
-    // Element: chart-header__left__title
     &__title {
       font-size: 18px;
       font-weight: 700;
@@ -28,16 +27,15 @@ $transition: all 0.3s ease;
     }
   }
 
-  // Element: chart-header__right
   &__right {
     display: flex;
     align-items: center;
-    gap: calc(#{$spacing} / 2); // Sử dụng calc()
+    gap: calc(#{$spacing} / 2); 
     margin-left: auto;
 
-    // Element: chart-header__right__item
+
     &__item {
-      padding: 5px 10px; // Thay 5px và 10px trực tiếp
+      padding: 5px 10px; 
       border-radius: $border-radius;
       background-color: $secondary-bg;
       color: $text-color;
@@ -46,21 +44,21 @@ $transition: all 0.3s ease;
       cursor: pointer;
       transition: $transition;
 
-      // Hover state
+
       &:hover {
-        background-color: #d7d9db; // Tối màu nhẹ (5% tối)
+        background-color: #d7d9db; 
         color: $accent-color;
       }
 
-      // Modifier: chart-header__right__item--active
+
       &--active {
         background-color: $accent-color;
         color: #ffffff;
         font-weight: 700;
 
-        // Hover state for active item
+
         &:hover {
-          background-color: #0056b3; // Tối màu (10% tối)
+          background-color: #0056b3;
           color: #ffffff;
         }
       }
