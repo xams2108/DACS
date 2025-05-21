@@ -14,7 +14,6 @@ const getChartData = async (params) => {
             throw new Error('Interval must be a non-empty string');
         }
         const data = await getData(`api/market/cryptocurrency/chart/${symbol}/${interval}?skip=${skip}`);
-        
         return data;
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu biểu đồ:', error.message);

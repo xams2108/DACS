@@ -17,11 +17,9 @@ function BoxTrending(){
         fetchApi()
         
     },[])
-    console.log(data)
     return (
         <>
-            
-            <div className="Box" >
+            <div className='Box'>
                 <Row gutter={[20,40]}>
                     <Col span={12}>
                         <Trending title="🚀Top Trending NFT"data={data.nfts}/>
@@ -30,8 +28,8 @@ function BoxTrending(){
                         <Trending title="🔥Top Trending Coin🔥" data={data.coins}/>
                     </Col>
                 </Row>
+ 
             </div>
-
         </>
     )
 }

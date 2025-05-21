@@ -1,45 +1,29 @@
-const mongoose = require("mongoose")
-
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  
-  walletAddress: {
+  address: {
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: (v) => /^0x[a-fA-F0-9]{40}$/.test(v),
-      message: 'Invalid Ethereum address'
-    }
   },
-
-  nonce: {
+  email: {
     type: String,
-    default: () => Math.floor(Math.random() * 1000000).toString(),
-    select: false
-  },
-
-  // Thông tin profile (tuỳ chọn)
-  profile: {
-    username: String,
-    email: String,
-    
-    avatar: String 
+    unique: true, 
   },
   statusNotify: {
     type: Boolean,
-    default: true
+    default: true,
   },
-  
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
+
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

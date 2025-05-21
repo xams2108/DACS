@@ -27,8 +27,11 @@ function LayoutDefault() {
                        
                     </div>
                     <div className='header__nav__right'>
-                        <Notify/>
-                        <ConnectWallet/>
+                        <div className='header__nav__right__item'>
+                            <Notify/>
+                            <ConnectWallet/>
+                        </div>
+                    
                     </div>
                 </div>
             </header>

@@ -1,8 +1,8 @@
-import Main from "../../components/grid/dashboard"
+
 function Setting () {
     return(
         <>
-            <Main/>
+            <p>hello</p>
         </>
     )
 }

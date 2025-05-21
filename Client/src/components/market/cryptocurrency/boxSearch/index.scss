@@ -4,19 +4,20 @@
     background-color: #fff;
     border-radius: 8px;
     height: 100%;
-    overflow-x: auto;
+    overflow-y: auto;
 
     &__item {
         padding: 10px;
-        border-radius: 1px so;
         border-radius: 4px;
         transition: background-color 0.3s;
+
         &:hover {
-            background-color: #f8f8f8;
+            background-color: #d6d6d6;
         }
+
         &--active {
-            background-color: #e0e0e0;
+            padding: 10px;
+            background-color: #a3a2a2;
         }
     }
-    
 }

@@ -10,7 +10,6 @@ const { Text } = Typography;
 
 function BoxSearch() {
     const { symbol, setSymbol} = useChartProvider();
-    console.log("symbol", symbol);
     const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(false);
     const [listCoins, setListCoin] = useState([]);
@@ -52,7 +51,7 @@ function BoxSearch() {
                     <Card height={470}>
                         <div className="ListSymbol">
                             {listCoins.map((coin) => (
-                                <div className="ListSymbol__item" key={coin.symbol} onClick={() => handleSymbol(coin.symbol)}>
+                                <div className={'ListSymbol__item' + (symbol === coin.symbol ? '--active' : '')} key={coin.symbol} onClick={() => handleSymbol(coin.symbol)}>
                                     <span>{coin.baseAsset}/{coin.quoteAsset}</span>
                                 </div>
                             ))}

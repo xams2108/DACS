@@ -39,12 +39,15 @@
             cursor: pointer;
             
         }
-        
+        &__right__item{
+            display: flex;
+            align-items: center;
+          
+        }
+    }
 
     }
 
-    
-}
 .content{
     padding: 20px;
 }

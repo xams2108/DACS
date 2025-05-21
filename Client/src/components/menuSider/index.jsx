@@ -27,7 +27,7 @@ function menuSider() {
             ]
         },
         {   
-            label: <Link to="/setting">setting</Link>,
+            label: <Link to="/settings">Settings</Link>,
             icon: <SettingOutlined />,
         },
     ]

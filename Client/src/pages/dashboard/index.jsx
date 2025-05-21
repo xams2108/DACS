@@ -2,7 +2,7 @@ import { Col, Row } from 'antd';
 import CartItem from '../../components/cardItem';
 import TopCoin from './topcoin'
 import Trending from './trending'
-import News from './news'
+import Overview from './overview'
 function Dashboard() {
 
    
@@ -15,11 +15,10 @@ function Dashboard() {
                 <Trending/>
             </Col>
             <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <News/>
+                <Overview/>
             </Col>
         </Row>
         <Row gutter={[20,20]} className='mt-20'>
-            
             <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
                 <CartItem height={400} title="Box7"/>
             </Col>

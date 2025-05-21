@@ -1,26 +1,42 @@
-const express = require("express")
-const database = require("./config/database")
-const bodyparse = require("body-parser")
-const cookieParser = require("cookie-parser")
-const cors = require("cors")
-require("dotenv").config()
-const app = express()
-const port = process.env.PORT
+const express = require("express");
+const database = require("./config/database");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const http = require("http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+require("dotenv").config();
 
-//cho phép FE gửi data lên tránh lỗi 
-app.use(cors())
- 
-//cho phép lưu cookie
-app.use(cookieParser())
+const app = express();
+const port = process.env.PORT;
 
-//gửi json từ client
-app.use(bodyparse.json())
 
-//Route API
-const route = require("./router/index.route")
-route(app)
+const corsOptions = {
+  origin: process.env.CLIENT_DOMAIN, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, 
+};
 
-database.connect()
-app.listen(port, () => {
-    console.log(`Đang chạy trên port ${port}`)
-})
+// Middleware
+app.use(cors(corsOptions ));
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+// Khởi tạo server HTTP và Socket.io
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {origin: "*",}
+});
+global._io = io;
+
+// Route API
+const route = require("./router/index.route");
+route(app);
+
+// Kết nối database và khởi động server
+database.connect();
+server.listen(port, () => {
+  console.log(`🚀 Server running at http://localhost:${port}`);
+  console.log(`📡 Socket.IO running at ws://localhost:${port}`);
+});
