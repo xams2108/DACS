@@ -1,13 +1,13 @@
-const authService = require('../../services/auth.service');
+const authService = require('../../services/API/auth.service');
 
 // GET /auth/login
 exports.getLoginPayload = async (req, res) => {
     try {
         const result = await authService.generateLoginPayload(req.query);
-        res.send(result);
+        return res.send(result);
     } catch (error) {
         console.error('Error getting login payload:', error);
-        res.status(400).send(error.message);
+        return res.send(error.message);
     }
 };
 
@@ -15,10 +15,12 @@ exports.getLoginPayload = async (req, res) => {
 exports.postLogin = async (req, res) => {
     try {
         const result = await authService.loginUser(req.body);
-        res.status(200).send({ token: result.token });
+        res.cookie("jwt", result.token);
+        return res.status(200).send({ token: result.token });
+
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(400).send(error.message);
+        return res.status(400).json({ success: false, message: error.message });
     }
 };
 
@@ -26,10 +28,10 @@ exports.postLogin = async (req, res) => {
 exports.isLoggedIn = async (req, res) => {
     try {
         const isLoggedIn = await authService.checkLoggedIn(req.cookies?.jwt);
-        res.send(isLoggedIn);
+        return res.json(isLoggedIn);
     } catch (error) {
         console.error('Error checking login status:', error);
-        res.status(400).send(error.message);
+        return res.status(400).json({ success: false, message: error.message });    
     }
 };
 
@@ -37,9 +39,9 @@ exports.isLoggedIn = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         await authService.logoutUser(res);
-        res.send(true);
+        return res.json({ success: true, message: "Logged out successfully" });
     } catch (error) {
         console.error('Error logging out:', error);
-        res.status(400).send(error.message);
+        return res.status(400).json({ success: false, message: error.message });
     }
 };

@@ -1,4 +1,4 @@
-const Controller = require("../../controller/API/notify.controller")
+const Controller = require("../controller/API/notify.controller")
 const express = require("express")
 const router = express.Router()
 

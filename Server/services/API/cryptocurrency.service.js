@@ -1,6 +1,6 @@
-const Symbols = require('../model/symbol.model');
+const Symbols = require('../../model/symbol.model');
 const axios = require('axios');
-const getIntervalMilliseconds = require('../helper/getIntervalMilliseconds.helper');
+const getIntervalMilliseconds = require('../../helper/getIntervalMilliseconds.helper');
 
 // Lấy danh sách symbol
 exports.getSymbols = async (query) => {

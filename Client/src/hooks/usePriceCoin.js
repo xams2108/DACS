@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
-const useGetPriceCoin = (symbol) => {
-    const [price, setPrice] = useState(null);
-    useEffect(() => {
-        const ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}@ticker`);
+import websocketUtil from '../utils/websocket';
 
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            setPrice(data); 
-        };
+const useRealtimePrice = (symbol) => {
+  const [data, setData] = useState(null);
 
-        ws.onerror = (error) => {
-            console.error('WebSocket Error:', error);
-        };
+  useEffect(() => {
+    if (!symbol) return;
 
-        return () => {
-            ws.close();
-        };
-    }, [symbol]);
+    websocketUtil.connect();  
+    websocketUtil.send('subscribe:token', symbol);
+    const handlePriceUpdate = (data1) => {
+      setData(data1);
+    };
 
-    return price;
+    websocketUtil.on(`price:update:${symbol}`, handlePriceUpdate);
+
+    return () => {
+      websocketUtil.send('unsubscribe:token', symbol);
+      websocketUtil.off(`price:update:${symbol}`, handlePriceUpdate);
+      websocketUtil.disconnect();
+    };
+  }, [symbol]);
+
+  return { data };
 };
 
-export default useGetPriceCoin;
+export default useRealtimePrice;

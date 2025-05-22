@@ -28,7 +28,9 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {origin: "*",}
 });
-global._io = io;
+const socket = require("./socket/index");
+socket(io); 
+
 
 // Route API
 const route = require("./router/index.route");

@@ -1,5 +1,5 @@
-const thirdwebAuth = require('../config/thirdwebAuth');
-const User = require('../model/user.model');
+const thirdwebAuth = require('../../config/thirdwebAuth');
+const User = require('../../model/user.model');
 
 // Generate login payload (GET /auth/login)
 exports.generateLoginPayload = async ({ address, chainId }) => {

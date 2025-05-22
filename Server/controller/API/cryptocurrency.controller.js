@@ -1,4 +1,4 @@
-const cryptocurrencyService = require('../../services/cryptocurrency.service');
+const cryptocurrencyService = require('../../services/API/cryptocurrency.service');
 // GET Symbols
 exports.index = async (req, res) => {
     try {

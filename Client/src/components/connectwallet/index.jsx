@@ -7,7 +7,6 @@ import "./connectWallet.scss";
 const wallets = [
   createWallet("io.metamask"),
   createWallet("com.okex.wallet"),
-  createWallet("com.coinbase.wallet")
 ];
 
 
