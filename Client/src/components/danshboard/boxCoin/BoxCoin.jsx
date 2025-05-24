@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 import usePriceCoin from "../../../hooks/usePriceCoin"; 
 
 function BoxCoin({ title, icon, bgColor}) {
-    const priceData = usePriceCoin(title.toLowerCase() + 'usdt'); 
+    const priceData = usePriceCoin(title.toLowerCase() + 'usdt', 'ticker'); 
+    console.log(priceData);
     const [previousPrice, setPreviousPrice] = useState(null);
     const [priceChange, setPriceChange] = useState(0);
     

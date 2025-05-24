@@ -1,10 +1,10 @@
 const socketService = require('../../services/WS/binance.service');
 
-module.exports.subscribeToToken = (socket, symbol) => {
-    socketService.subscribeToBinance(socket, symbol);
+module.exports.subscribeToToken = (socket, symbol, streams) => {
+    socketService.subscribeToBinance(socket, symbol, streams);
 };
 
-module.exports.unsubscribeFromToken = (socket, symbol) => {
-    socketService.unsubscribeFromBinance(socket, symbol);
-  }
+module.exports.unsubscribeFromToken = (socket, symbol, streams) => {
+    socketService.unsubscribeFromBinance(socket, symbol, streams);
+};
 

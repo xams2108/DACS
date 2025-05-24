@@ -1,51 +1,58 @@
-import {Layout } from 'antd';
-import Notify from '../components/notify'
+import { Layout, Row, Col } from 'antd';
+import Notify from '../components/notify';
 import MenuSider from '../components/menuSider';
-import ConnectWallet from '../components/connectwallet'
-import { MenuFoldOutlined,MenuUnfoldOutlined } from '@ant-design/icons'
-import './layoutDefault.scss'
+import ConnectWallet from '../components/connectwallet';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import './layoutDefault.scss';
 import { useState } from 'react';
-import {Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+
 const { Content, Footer, Sider } = Layout;
-
-
 
 function LayoutDefault() {
     const [collapsed, setCollapsed] = useState(false);
-    return(
+
+    return (
         <>
             <header className='header'>
                 <div className={`header__logo ${collapsed && "header__logo--active"}`}>
-                    <img src={collapsed? "/image/logo-mini.jpg": "/image/Logo.png"} alt='logo'></img>
+                    <img src={collapsed ? "/image/logo-mini.jpg" : "/image/Logo.png"} alt='logo'></img>
                 </div>
                 <div className='header__nav'>
                     <div className='header__nav__left'>
-                        <div className='control' onClick={() =>setCollapsed(!collapsed)}>
-                            {collapsed ? <MenuUnfoldOutlined/>:<MenuFoldOutlined />}
-                            
+                        <div className='control' onClick={() => setCollapsed(!collapsed)}>
+                            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                         </div>
-                       
                     </div>
                     <div className='header__nav__right'>
                         <div className='header__nav__right__item'>
-                            <Notify/>
-                            <ConnectWallet/>
+                            <Notify />
+                            <ConnectWallet />
                         </div>
-                    
                     </div>
                 </div>
             </header>
             <Layout>
                 <Sider theme='light' collapsed={collapsed}>
-                    <MenuSider/>
+                    <MenuSider />
                 </Sider>
-
-                <Content  className='content'>
-                    <Outlet/>
-                </Content>
+                <Layout>
+                    <Content className='content'>
+                        <Outlet />
+                    </Content>
+                </Layout>
             </Layout>
-            <Footer>footer</Footer>
+             <Footer style={{ backgroundColor: '#ffff', padding: '20px 0' }}>
+                        <Row >
+                            <Col span={24} style={{ textAlign: 'center' }}>
+                                <p style={{ color: '#000', fontSize: '14px' }}>
+                                    © 2025 All rights reserved. Designed by <a href='https://x.com/trandotiendat' target='_blank' rel='noopener noreferrer'>TRAN DO TIEN DAT</a>
+                                </p>
+                            </Col>
+                        </Row>
+             </Footer>
         </>
-    )
+    );
 }
-export default LayoutDefault
+
+export default LayoutDefault;

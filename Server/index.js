@@ -2,6 +2,7 @@ const express = require("express");
 const database = require("./config/database");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const session = require('express-session');
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
@@ -21,6 +22,12 @@ const corsOptions = {
 // Middleware
 app.use(cors(corsOptions ));
 app.use(cookieParser());
+app.use(session({
+  secret: process.env.ADMIN_PRIVATE_KEY, // Khóa bí mật, bạn thay bằng chuỗi phức tạp hơn nhé
+  resave: false,                      // Không lưu session nếu chưa thay đổi
+  saveUninitialized: false,           // Không tạo session mới nếu chưa dùng
+
+}));
 app.use(bodyParser.json());
 
 // Khởi tạo server HTTP và Socket.io

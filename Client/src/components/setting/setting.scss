@@ -1,0 +1,224 @@
+.settings-container {
+  margin: 0 auto;
+  padding: 24px;
+  height: 100%;
+
+  .settings-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 32px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+
+    .card-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 24px;
+
+      .avatar-container {
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: scale(1.03);
+
+          .avatar-overlay {
+            opacity: 1;
+          }
+        }
+      }
+
+      .user-avatar {
+        border: 3px solid #f0f2f5;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .avatar-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        .edit-icon {
+          color: white;
+          font-size: 24px;
+        }
+      }
+
+      .user-info {
+        flex: 1;
+
+        .user-email {
+          font-size: 22px;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #2c3e50;
+
+          .edit-action {
+            color: #1890ff;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.2s;
+
+            &:hover {
+              color: #40a9ff;
+            }
+          }
+        }
+
+        .wallet-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: #f8f9fa;
+          padding: 8px 12px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.2s;
+          width: fit-content;
+
+          &:hover {
+            background: #e9ecef;
+
+            .copy-action {
+              opacity: 1;
+            }
+          }
+
+          .wallet-icon {
+            color: #6c757d;
+          }
+
+          .wallet-address {
+            font-family: monospace;
+            font-size: 14px;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+
+          .copy-action {
+            color: #1890ff;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .section-divider {
+      margin: 24px 0;
+      border-color: #f0f0f0;
+    }
+
+    .settings-section {
+      flex: 1;
+      overflow-y: auto;
+
+      .settings-title {
+        font-size: 18px;
+        color: #343a40;
+        margin-bottom: 24px;
+        font-weight: 500;
+      }
+
+      .preferences-form {
+        .setting-item {
+          margin-bottom: 20px;
+
+          .ant-form-item-label {
+            label {
+              font-weight: 500;
+              color: #495057;
+            }
+          }
+
+          .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .setting-icon {
+              color: #6c757d;
+              font-size: 18px;
+            }
+
+            .setting-switch {
+              &.ant-switch-checked {
+                background-color: #1890ff;
+              }
+            }
+
+            .setting-label {
+              color: #6c757d;
+              font-size: 14px;
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+    }
+
+    .save-button-container {
+      margin-top: auto;
+      padding-top: 24px;
+
+      .save-button {
+        width: 100%;
+        height: 42px;
+        font-weight: 500;
+        background-color: #1890ff;
+        border: none;
+        box-shadow: 0 2px 4px rgba(24, 144, 255, 0.2);
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #40a9ff;
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 16px;
+
+    .profile-section {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+
+      .user-info {
+        width: 100%;
+
+        .wallet-info {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}

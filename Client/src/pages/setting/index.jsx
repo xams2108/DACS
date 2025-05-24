@@ -1,8 +1,8 @@
-
+import SettingBox from "../../components/setting"
 function Setting () {
     return(
-        <>
-            <p>hello</p>
+        <>      
+            <SettingBox /> 
         </>
     )
 }

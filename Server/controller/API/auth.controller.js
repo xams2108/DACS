@@ -15,7 +15,7 @@ exports.getLoginPayload = async (req, res) => {
 exports.postLogin = async (req, res) => {
     try {
         const result = await authService.loginUser(req.body);
-        res.cookie("jwt", result.token);
+        req.session.jwt = result.token;
         return res.status(200).send({ token: result.token });
 
     } catch (error) {
@@ -27,7 +27,7 @@ exports.postLogin = async (req, res) => {
 // GET /auth/isLoggedIn
 exports.isLoggedIn = async (req, res) => {
     try {
-        const isLoggedIn = await authService.checkLoggedIn(req.cookies?.jwt);
+        const isLoggedIn = await authService.checkLoggedIn(req.session?.jwt);
         return res.json(isLoggedIn);
     } catch (error) {
         console.error('Error checking login status:', error);

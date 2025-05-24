@@ -2,23 +2,21 @@ const WebSocket = require("ws");
 const clients = {}; // { BTCUSDT: Set([socket1, socket2, ...]), ... }
 const streams = {}; // { BTCUSDT: WebSocket }
 
-function createBinanceStream(symbol) {
-  const ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@trade`);
+function createBinanceStream(symbol, streams) {
+  const ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@${streams}`);
 
   ws.on("message", (data) => {
     const parsed = JSON.parse(data);
-    const priceData = {
+    const Data = {
       symbol: symbol.toUpperCase(),
-      price: parsed.p,
-      quantity: parsed.q,
-      time: parsed.T,
-      action: parsed.m ? "sell" : "buy", // typo fixed: 'acction' → 'action'
+      type: streams,
+      data: parsed
     };
 
     const sockets = clients[symbol];
     if (sockets) {
       for (const socket of sockets) {
-        socket.emit(`price:update:${symbol}`, priceData);
+        socket.emit(`price:update:${symbol}@${streams}`, Data);
       }
     }
   });
@@ -32,16 +30,16 @@ function createBinanceStream(symbol) {
 }
 
 module.exports = {
-  subscribeToBinance: (socket, symbol) => {
+  subscribeToBinance: (socket, symbol, streams) => {
     if (!clients[symbol]) clients[symbol] = new Set();
     clients[symbol].add(socket);
 
     if (!streams[symbol]) {
-      createBinanceStream(symbol);
+      createBinanceStream(symbol, streams);
     }
   },
 
-  unsubscribeFromBinance: (socket, symbol) => {
+  unsubscribeFromBinance: (socket, symbol, streams) => {
     if (clients[symbol]) {
       clients[symbol].delete(socket);
       if (clients[symbol].size === 0) {
