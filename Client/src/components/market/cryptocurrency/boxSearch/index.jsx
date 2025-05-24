@@ -9,6 +9,7 @@ const { Search } = Input;
 const { Text } = Typography;
 
 function BoxSearch() {
+    
     const { symbol, setSymbol} = useChartProvider();
     const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(false);
@@ -23,6 +24,7 @@ function BoxSearch() {
         };
         fetchApi(); 
     }, [searchText]);
+   
     function handleSymbol(symbol) {
         setSymbol(symbol);
     }

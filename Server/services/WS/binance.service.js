@@ -31,11 +31,15 @@ function createBinanceStream(symbol, streams) {
 
 module.exports = {
   subscribeToBinance: (socket, symbol, streams) => {
-    if (!clients[symbol]) clients[symbol] = new Set();
-    clients[symbol].add(socket);
+        try {
+      if (!clients[symbol]) clients[symbol] = new Set();
+      clients[symbol].add(socket);
 
-    if (!streams[symbol]) {
-      createBinanceStream(symbol, streams);
+      if (!streams[symbol]) {
+        createBinanceStream(symbol, streams);
+      }
+    } catch (error) {
+      console.error(`Error while handling WebSocket subscription for ${symbol}:`, error);
     }
   },
 

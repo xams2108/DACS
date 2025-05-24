@@ -1,7 +1,6 @@
 import { getData } from "../../utils/apiRequest";
 
 const getChartData = async (params) => {
-    console.log(params)
     const symbol = params.symbol;
     const interval = params.interval;
     const skip = params.skip || '0'
