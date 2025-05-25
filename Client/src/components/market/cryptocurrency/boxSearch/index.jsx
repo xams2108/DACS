@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import './index.scss';
 import getCoins from "../../../../services/api/getCoins.api";
 import { useChartProvider } from "../../../../providers/chartProvider";
-
+import SymbolItem from "./symbolItem";
 const { Search } = Input;
 const { Text } = Typography;
 
@@ -41,7 +41,7 @@ function BoxSearch() {
                     allowClear
                     enterButton
                     size="large"
-                    onPressEnter={handleSearch}
+                    onPressEnter={(e) => handleSearch(e.target.value)}
                     onSearch={handleSearch}
                     loading={loading}
                     className="custom-search-input"
@@ -54,7 +54,7 @@ function BoxSearch() {
                         <div className="ListSymbol">
                             {listCoins.map((coin) => (
                                 <div className={'ListSymbol__item' + (symbol === coin.symbol ? '--active' : '')} key={coin.symbol} onClick={() => handleSymbol(coin.symbol)}>
-                                    <span>{coin.baseAsset}/{coin.quoteAsset}</span>
+                                    <SymbolItem coin={coin} />
                                 </div>
                             ))}
                         </div>

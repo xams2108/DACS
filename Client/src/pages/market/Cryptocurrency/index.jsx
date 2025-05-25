@@ -3,6 +3,7 @@ import { Col, Row,Flex} from 'antd';
 import BoxSearch from "../../../components/market/cryptocurrency/boxSearch";
 import BoxChart from "../../../components/market/cryptocurrency/boxChart";
 import { ChartProvider } from "../../../providers/chartProvider";
+
 function Cryptocurrency () {
     return(
         <>
@@ -12,9 +13,9 @@ function Cryptocurrency () {
                                 <BoxSearch />
                             </Col>
                             <Col xxl={15} xl={15} lg={15} md={24} sm={24} xs={24} >
-                            <cartItem height={500}> 
+                            <CartItem height={500}> 
                                     <BoxChart />
-                            </cartItem>
+                            </CartItem>
                             </Col>
                             <Col xxl={5} xl={5} lg={5} md={24} sm={24} xs={24}>
                                 <Flex vertical={true}>

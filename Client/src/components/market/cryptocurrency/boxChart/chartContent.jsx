@@ -213,7 +213,7 @@ function ChartContent() {
 
   return (
     <>
-      <div className="mt-20"></div>
+      <div></div>
       <CardItem height={470} style={{ padding: 0, margin: 0 }}>
         <div
           ref={chartContainer}
