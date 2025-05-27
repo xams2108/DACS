@@ -1,8 +1,9 @@
 import { Menu } from 'antd';
-import { DashboardOutlined, PictureOutlined, DollarOutlined, BarChartOutlined, SettingOutlined } from '@ant-design/icons'
+import { DashboardOutlined, PictureOutlined, DollarOutlined, BarChartOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import './menuSider.scss';
 
-function menuSider() {
+function MenuSider() {
     const items = [
         {
             label: <Link to="/">Dash Board</Link>,
@@ -28,18 +29,20 @@ function menuSider() {
         },
         {   
             label: <Link to="/settings">Settings</Link>,
+            key: "/settings",
             icon: <SettingOutlined />,
         },
-    ]
+    ];
+
     return (
-        <>
-            <Menu
-                mode="inline" 
-                items={items}
-                defaultSelectedKeys={["/"]}
-                
-            />
-        </>
-    )
+        <Menu
+            theme="dark"
+            mode="inline"
+            items={items}
+            defaultSelectedKeys={["/"]}
+            className="custom-menu"
+        />
+    );
 }
-export default menuSider
+
+export default MenuSider;

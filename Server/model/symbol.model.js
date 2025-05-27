@@ -15,6 +15,11 @@ const symbolSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    icon: {
+        default: "https://e7.pngegg.com/pngimages/398/669/png-clipart-coin-computer-icons-information-coin-text-gold-coin-thumbnail.png",
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         enum: ['TRADING', 'SUSPENDED', 'TERMINATED'], 

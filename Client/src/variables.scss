@@ -1,0 +1,25 @@
+// Màu nền chính & phụ
+$background-color: #0d1117;        // Nền chính (rất tối, neutral)
+$background-secondary: #161b22;    // Nền phụ (card, panel)
+
+// Màu chữ
+$text-primary: #ffffff;            // Màu chữ chính (trắng)
+$text-secondary: #c9d1d9;          // Màu chữ phụ (xám nhạt)
+
+// Màu thành phần UI
+$component-color: #00e676;         // Xanh neon cho nút hoặc card
+$component-hover: #1de9b6;         // Hover neon mềm hơn
+
+// Border hoặc divider
+$border-color: #30363d;            // Viền chia / border
+$border-accent: #00bcd4;           // Viền nổi bật / hover
+
+// Màu nhấn, hành động
+$accent-color: #f50057;            // Màu nhấn hồng
+$warning-color: #ff9800;           // Cảnh báo (cam)
+$error-color: #f44336;             // Lỗi (đỏ)
+$success-color: #66bb6a;           // Thành công (xanh lá)
+
+// Gradient (tuỳ chọn)
+$gradient-primary: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+$gradient-accent: linear-gradient(135deg, #f50057 0%, #ff4081 100%);

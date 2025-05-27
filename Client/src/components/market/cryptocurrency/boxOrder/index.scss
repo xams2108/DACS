@@ -1,0 +1,59 @@
+@import '../../../../variables.scss';
+
+.BoxOrder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__Header__Tabs {
+    display: flex;
+    justify-content: center;
+    background-color: $background-secondary;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+  }
+
+  &__Header__Tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    user-select: none;
+    transition: all 0.3s ease;
+    background: $background-color;
+    color: $text-secondary;
+
+    &:hover {
+      background: darken($background-color, 5%);
+      color: $component-color;
+    }
+
+    &--active {
+      color: $text-primary;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba($component-hover, 0.4);
+    }
+  }
+
+  .BoxOrder__Header__Tab--active.Notify {
+    background-color: $component-color;
+  }
+
+  .BoxOrder__Header__Tab--active.Trade {
+    background-color: $success-color;
+  }
+
+  &__Body {
+    flex: 1;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    background: $background-secondary;
+    overflow-y: auto;
+    color: $text-primary;
+  }
+}

@@ -5,6 +5,7 @@ import getChartData from '../../../../services/api/getChartData';
 import './content.scss';
 import { useChartProvider } from '../../../../providers/chartProvider';
 import usePriceCoin from '../../../../hooks/usePriceCoin';
+
 function ChartContent() {
   const chartContainer = useRef(null);
   const refToolTip = useRef(null);
@@ -16,9 +17,9 @@ function ChartContent() {
 
   const candlestickSeriesRef = useRef(null);
   const volumeSeriesRef = useRef(null);
-  const lastTimeRef = useRef(null); // <-- thêm ref lưu last update time
+  const lastTimeRef = useRef(null);
 
-  // Hàm lấy dữ liệu lịch sử từ API
+  // Fetch historical data from API
   const fetchData = async ({ symbol, interval, skip = 0 }) => {
     try {
       const response = await getChartData({ symbol, interval, skip });
@@ -28,21 +29,21 @@ function ChartContent() {
     }
   };
 
-  // Reset dữ liệu khi symbol hoặc interval thay đổi
+  // Reset data when symbol or interval changes
   useEffect(() => {
     setChartData([]);
     setSkip(0);
     fetchData({ symbol, interval, skip: 0 });
   }, [symbol, interval]);
 
-  // Tải thêm dữ liệu khi skip thay đổi
+  // Load more data when skip changes
   useEffect(() => {
     if (skip > 0) {
       fetchData({ symbol, interval, skip });
     }
   }, [skip]);
 
-  // Chuyển đổi dữ liệu lịch sử sang định dạng của lightweight-charts
+  // Transform historical data for lightweight-charts
   const transformedData = useMemo(() => {
     return chartData.map((item) => ({
       time: Math.floor(item.openTime / 1000),
@@ -54,14 +55,14 @@ function ChartContent() {
     }));
   }, [chartData]);
 
-  // Cập nhật lastTimeRef khi dữ liệu lịch sử thay đổi
+  // Update lastTimeRef when transformedData changes
   useEffect(() => {
     if (transformedData.length > 0) {
       lastTimeRef.current = transformedData[transformedData.length - 1].time;
     }
   }, [transformedData]);
 
-  // State để hiển thị thông tin trên tooltip và legend
+  // State for tooltip and legend data
   const [seriesData, setSeriesData] = useState({
     close: "-",
     high: "-",
@@ -70,39 +71,40 @@ function ChartContent() {
     time: "-",
   });
 
-  // Khởi tạo và cấu hình biểu đồ
+  // Initialize and configure the chart
   useEffect(() => {
     if (!chartContainer.current || transformedData.length === 0) return;
 
     const chart = createChart(chartContainer.current, {
       autoSize: true,
       layout: {
-        backgroundColor: '#ffffff',
-        textColor: '#333',
+        background: { color: '#1E1E2F' },
+        textColor: '#c9d1d9',
       },
       grid: {
-        vertLines: { color: '#f0f0f0' },
-        horzLines: { color: '#f0f0f0' },
+        vertLines: { color: '#30363d' },
+        horzLines: { color: '#30363d' },
       },
       priceLineVisible: true,
       rightPriceScale: {
         visible: true,
-        borderColor: '#cccccc',
+        borderColor: '#30363d',
       },
       timeScale: {
         timeVisible: true,
         secondsVisible: false,
         rightOffset: 12,
         rightBarStaysOnScroll: true,
+        borderColor: '#30363d',
       },
     });
 
     candlestickSeriesRef.current = chart.addCandlestickSeries({
-      upColor: '#26a69a',
-      downColor: '#ef5350',
+      upColor: '#66bb6a',
+      downColor: '#f44336',
       borderVisible: false,
-      wickUpColor: '#26a69a',
-      wickDownColor: '#ef5350',
+      wickUpColor: '#66bb6a',
+      wickDownColor: '#f44336',
     });
 
     volumeSeriesRef.current = chart.addHistogramSeries({
@@ -116,17 +118,17 @@ function ChartContent() {
       },
     });
 
-    // Thiết lập dữ liệu ban đầu
+    // Set initial data
     candlestickSeriesRef.current.setData(transformedData);
     volumeSeriesRef.current.setData(
       transformedData.map((item) => ({
         time: item.time,
         value: item.volume,
-        color: item.close >= item.open ? 'rgba(38, 166, 154, 0.3)' : 'rgba(239, 83, 80, 0.3)',
+        color: item.close >= item.open ? 'rgba(102, 187, 106, 0.3)' : 'rgba(244, 67, 54, 0.3)',
       }))
     );
 
-    // Xử lý sự kiện di chuyển con trỏ để hiển thị tooltip
+    // Handle crosshair movement for tooltip
     const handleCrosshairMove = (param) => {
       const seriesData = param.seriesData.get(candlestickSeriesRef.current);
       if (!seriesData || !refToolTip.current) {
@@ -161,7 +163,7 @@ function ChartContent() {
       refToolTip.current.classList.add('visible');
     };
 
-    // Xử lý tải thêm dữ liệu khi cuộn
+    // Handle loading more data on scroll
     const handleVisibleRangeChange = (newRange) => {
       if (!newRange) return;
 
@@ -175,19 +177,20 @@ function ChartContent() {
     chart.subscribeCrosshairMove(handleCrosshairMove);
     chart.timeScale().fitContent();
 
-    // Dọn dẹp khi component unmount
+    // Cleanup on unmount
     return () => {
       chart.unsubscribeCrosshairMove(handleCrosshairMove);
+      chart.timeScale().unsubscribeVisibleLogicalRangeChange(handleVisibleRangeChange);
       chart.remove();
     };
   }, [transformedData]);
 
-  // Cập nhật dữ liệu realtime từ steamdata (có kiểm tra lastTimeRef)
+  // Update real-time data
   useEffect(() => {
     if (steamdata && candlestickSeriesRef.current && volumeSeriesRef.current) {
       const klineData = steamdata.data.k;
       const newData = {
-        time: Math.floor(klineData.t / 1000), // Chuyển ms sang s
+        time: Math.floor(klineData.t / 1000),
         open: parseFloat(klineData.o),
         high: parseFloat(klineData.h),
         low: parseFloat(klineData.l),
@@ -201,10 +204,10 @@ function ChartContent() {
         volumeSeriesRef.current.update({
           time: newData.time,
           value: newData.volume,
-          color: newData.close >= newData.open ? 'rgba(38, 166, 154, 0.3)' : 'rgba(239, 83, 80, 0.3)',
+          color: newData.close >= newData.open ? 'rgba(102, 187, 106, 0.3)' : 'rgba(244, 67, 54, 0.3)',
         });
 
-        lastTimeRef.current = newData.time; // Cập nhật lại lastTimeRef
+        lastTimeRef.current = newData.time;
       } else {
         console.warn("Skipped update for older time:", newData.time);
       }
@@ -212,51 +215,50 @@ function ChartContent() {
   }, [steamdata]);
 
   return (
-    <>
-      <div></div>
-      <CardItem height={470} style={{ padding: 0, margin: 0 }}>
+    <CardItem height={470} style={{ padding: 0, margin: 0, background: '#161b22' }}>
+      <div
+        ref={chartContainer}
+        className="chart-container"
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+        }}
+      >
+        <div ref={refToolTip} className="BoxToolTip" />
         <div
-          ref={chartContainer}
+          ref={refLegend}
+          className="BoxLegend"
           style={{
-            width: '100%',
-            height: '100%',
-            position: 'relative',
+            display: 'flex',
+            position: 'absolute',
+            top: 20,
+            left: 20,
+            zIndex: 2,
+            gap: '16px',
+            background: 'rgba(22, 27, 34, 0.9)',
+            padding: '8px 12px',
+            borderRadius: '4px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            border: '1px solid #30363d',
           }}
         >
-          <div ref={refToolTip} className="BoxToolTip" />
-          <div
-            ref={refLegend}
-            className="BoxLegend"
-            style={{
-              display: 'flex',
-              position: 'absolute',
-              top: 20,
-              left: 20,
-              zIndex: 2,
-              gap: '16px',
-              background: 'rgba(255, 255, 255, 0.9)',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            }}
-          >
-            {['close', 'high', 'low', 'open'].map((key) => (
-              <p
-                key={key}
-                style={{
-                  margin: 0,
-                  color: '#26a69a',
-                  fontSize: '14px',
-                }}
-              >
-                {`${key.charAt(0).toUpperCase() + key.slice(1)}: `}
-                <span style={{ color: '#000' }}>{seriesData[key]}</span>
-              </p>
-            ))}
-          </div>
+          {['close', 'high', 'low', 'open'].map((key) => (
+            <p
+              key={key}
+              style={{
+                margin: 0,
+                color: '#00e676',
+                fontSize: '14px',
+              }}
+            >
+              {`${key.charAt(0).toUpperCase() + key.slice(1)}: `}
+              <span style={{ color: '#ffffff' }}>{seriesData[key]}</span>
+            </p>
+          ))}
         </div>
-      </CardItem>
-    </>
+      </div>
+    </CardItem>
   );
 }
 

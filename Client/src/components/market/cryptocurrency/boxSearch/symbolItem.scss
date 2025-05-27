@@ -1,14 +1,29 @@
+@import '../../../../variables';
+
 .symbol-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: Arial, sans-serif;
 
+
   &__right {
+    display: flex;
+    align-items: center;
+    
+    .symbol-item__icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+      border-radius: 50%;
+      border: 1px solid $border-color;
+      background-color: $background-color;
+    }
+
     .symbol-item__symbol-name {
-      font-weight: bold;
-      font-size: 16px;
-      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+      color: $text-primary;
     }
   }
 
@@ -18,21 +33,22 @@
     align-items: flex-end;
 
     .symbol-item__price {
-      font-size: 15px;
-      color: #000;
+      font-size: 13px;
+      color: $text-primary;
       margin-bottom: 4px;
+      user-select: text;
     }
 
     .symbol-item__change {
-      font-size: 13px;
-      color: #4caf50;
+      font-size: 12px;
+      font-weight: 600;
 
       &.negative {
-        color: #f44336;
+        color: $error-color;
       }
 
       &.positive {
-        color: #4caf50;
+        color: $success-color;
       }
     }
   }

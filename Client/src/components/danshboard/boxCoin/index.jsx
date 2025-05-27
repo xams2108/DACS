@@ -6,23 +6,20 @@ function BoxCoin() {
         {
             name: "BTC",
             icon: "/image/iconTopCoin/btc.png",
-            bgColor: "#FFF9C4"
         },
         {
             name: "ETH",
             icon: "/image/iconTopCoin/ethereum.png",
-            bgColor: "#BBDEFB"
             
         },
         {
             name: "BNB",
             icon: "/image/iconTopCoin/binance.png",
-            bgColor: "#C8E6C9"
         },
         {
             name: "SOl",
             icon: "/image/iconTopCoin/sol.png",
-            bgColor: "#E1BEE7"
+
         }
     ];
 

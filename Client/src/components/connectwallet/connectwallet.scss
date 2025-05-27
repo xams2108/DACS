@@ -1,29 +1,31 @@
-$primary-color: #fff8f8;
-$hover-color: #eeeff0;
-$border-radius: 20px;
-$box-shadow: rgba(132, 131, 131, 0.2) 0px 5px 15px;
+@import '../../variables';
 
 .tw-connect-wallet {
+  background-color: $background-secondary !important; // nền phụ tối
+  color: $text-primary !important; // chữ trắng
+  border: 1px solid $border-color !important;
+  padding: 10px 15px !important;
+  border-radius: 20px !important;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: rgba(0, 230, 118, 0.4) 0px 5px 15px !important;
+  transition: background-color 0.3s ease;
+  margin-left: 20px !important;
 
-
-    background-color: $primary-color !important;
-    color: rgb(34, 33, 33) !important; 
-    border: none !important;
-    padding: 10px 15px !important; 
-    border-radius: $border-radius !important;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: $box-shadow !important;
-    transition: background-color 0.3s;
-    margin-left: 20px !important;
-    &:hover {
-        background-color: $hover-color !important;
-    }
+  &:hover {
+    background-color: $component-hover !important;
+    box-shadow: rgba(29, 233, 182, 0.6) 0px 6px 20px !important;
+  }
 }
+
 .tw-connected-wallet {
-    border-radius: $border-radius !important;
-    margin-left: 20px !important;
-    &:hover {
-        background-color: $hover-color !important;
-    }
+  border-radius: 20px !important;
+  margin-left: 20px !important;
+  background-color: rgba(0, 230, 118, 0.7) !important; // màu xanh neon nhẹ
+  color: $background-color !important;
+
+  &:hover {
+    background-color: $component-hover !important;
+    box-shadow: rgba(29, 233, 182, 0.6) 0px 6px 20px !important;
+  }
 }

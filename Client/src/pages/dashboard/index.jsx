@@ -18,14 +18,7 @@ function Dashboard() {
                 <Overview/>
             </Col>
         </Row>
-        <Row gutter={[20,20]} className='mt-20'>
-            <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <CartItem height={400} title="Box7"/>
-            </Col>
-            <Col xxl={16} xl={16} lg={16} md={24} sm={24} xs={24}>
-                <CartItem height={400} title="Box8"/>
-            </Col>
-        </Row>
+      
     </>
   )
 }

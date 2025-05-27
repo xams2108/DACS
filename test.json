@@ -1,7 +1,9 @@
 {
-  "_id": "682cb07822e2684f41280f2a",
-  "address": "0xf3c737a1e0E96F7395A220CFE158171D9986A117",
-  "statusNotify": true,
-  "createdAt": "2025-05-20T16:40:24.743Z",
-  "updatedAt": "2025-05-20T16:40:24.743Z"
+    "_id": "680e401c7c0a7d97b4bce5f2",
+    "symbol": "ETHUSDT",
+    "baseAsset": "ETH",
+    "quoteAsset": "USDT",
+    "status": "TRADING",
+    "__v": 0,
+    "icon": "https://coin-images.coingecko.com/coins/images/51352/large/200x200_transparent.png?1730876157"
 }

@@ -1,0 +1,52 @@
+@import './variables';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ant-layout-content {
+  background-color: $background-color;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.mt-20{
+  margin-top: 20px ;
+}
+.mt-30{
+  margin-top: 30px;
+}
+.mt-40{
+  margin-top: 40px;
+}
+
+/* Nếu muốn áp dụng cho toàn bộ trang */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-secondary; // track (nền thanh cuộn)
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $component-color; // thanh cuộn chính
+  border-radius: 10px;
+  border: 2px solid $background-secondary; // để tạo hiệu ứng "viền"
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $component-hover; // màu khi hover
+}
+
+

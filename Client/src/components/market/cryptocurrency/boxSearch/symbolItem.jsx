@@ -1,27 +1,33 @@
-// SymbolItem.jsx
 import React from "react";
 import "./SymbolItem.scss";
 import usePriceCoin from "../../../../hooks/usePriceCoin";
 
 function SymbolItem({ coin }) {
   const { data: coinData } = usePriceCoin(coin.symbol, "ticker");
-
-  const priceRaw = coinData?.data?.c 
-  const changeRaw = coinData?.data?.P 
+  const priceRaw = coinData?.data?.c;
+  const changeRaw = coinData?.data?.P;
 
   const formatNumber = (value) => {
-  if (value === null || value === undefined) return "0.00";
-  const num = typeof value === "number" ? value : parseFloat(value);
-  return isNaN(num) ? "0.00" : num.toFixed(2);
-};
-    const price = formatNumber(priceRaw);
-    const change = formatNumber(changeRaw);
+    if (value === null || value === undefined) return "0.00";
+    const num = typeof value === "number" ? value : parseFloat(value);
+    return isNaN(num) ? "0.00" : num.toFixed(2);
+  };
+
+  const price = formatNumber(priceRaw);
+  const change = formatNumber(changeRaw);
 
   return (
     <div className="symbol-item">
       <div className="symbol-item__right">
+        {coin.icon && (
+          <img
+            className="symbol-item__icon"
+            src={coin.icon}
+            alt={coin.baseAsset}
+          />
+        )}
         <span className="symbol-item__symbol-name">
-          {coin.symbol}/{coin.quoteAsset}
+          {coin.baseAsset}/{coin.quoteAsset}
         </span>
       </div>
       <div className="symbol-item__left">

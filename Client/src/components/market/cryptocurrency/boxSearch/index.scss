@@ -1,23 +1,51 @@
+@import '../../../../variables.scss';
+
 .ListSymbol {
-    display: flex;
-    flex-direction: column; 
-    background-color: #fff;
-    border-radius: 8px;
-    height: 100%;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-secondary;
+  border-radius: 8px;
+  height: 100%;
+  overflow-y: auto;
+  color: $text-primary;
 
-    &__item {
-        padding: 10px;
-        border-radius: 4px;
-        transition: background-color 0.3s;
+  &__item {
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    cursor: pointer;
 
-        &:hover {
-            background-color: #d6d6d6;
-        }
-
-        &--active {
-            padding: 10px;
-            background-color: #d3d3d3;
-        }
+    &:hover {
+      background-color: lighten($background-secondary, 8%);
     }
+
+    &--active {
+      background-color: rgba($component-color,0.6);
+      
+      color: $background-color;
+      font-weight: 600;
+    }
+  }
 }
+
+
+
+.custom-search-input {
+  .ant-input-search-button {
+    background-color: $component-color !important;      
+    border-color: $component-color !important;
+    color: $background-color !important;                
+    font-weight: 700 !important;
+    border-radius: 0 6px 6px 0 !important;              
+
+    &:hover,
+    &:focus {
+      background-color: $component-hover !important;    
+      border-color: $component-hover !important;
+      color: $background-secondary !important;         
+      box-shadow: none !important;
+    }
+  }
+}
+
+

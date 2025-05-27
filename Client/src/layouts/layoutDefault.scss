@@ -1,53 +1,83 @@
-.header{
+@import '../variables.scss'; // chứa các biến như $background-color, $text-primary...
+
+.header {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: $background-secondary;
+  color: $text-primary;
+  border-bottom: 1px solid $border-color;
+
+  &__logo {
     display: flex;
-    width: 100%;
-    height: 50px;
-    &__logo{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 200px;
-        transition: 'all 0.3s ease';
-        &--active{
-            width: 80px;
-             transition: 'all 0.3s ease';
-        }
-        
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    transition: all 0.3s ease;
 
-    }
-    &__logo img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-    &__nav{
-        display: flex;
-        flex: 1;
-        justify-content: space-between;
-        align-items: center;
-        &__left{
-            display: flex;
-            align-items: center;
-            
-        }
-        &__left .search{
-            margin-left: 50px;
-            cursor: pointer;
-            
-        }
-        &__left .control{
-            cursor: pointer;
-            
-        }
-        &__right__item{
-            display: flex;
-            align-items: center;
-          
-        }
+    &--active {
+      width: 80px;
+      transition: all 0.3s ease;
     }
 
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+
+    &__left {
+      display: flex;
+      align-items: center;
+
+      .search {
+        margin-left: 50px;
+        cursor: pointer;
+        color: $text-secondary;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: $accent-color;
+        }
+      }
+
+      .control {
+        cursor: pointer;
+        color: $text-secondary;
+
+        &:hover {
+          color: $component-color;
+        }
+      }
     }
 
-.content{
-    padding: 20px;
+    &__right__item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      > * {
+        color: $text-secondary;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  padding: 20px;
+  background-color: $background-color;
+  color: $text-primary;
+  min-height: 100vh;
 }

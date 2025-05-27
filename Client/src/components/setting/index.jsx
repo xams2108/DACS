@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {Card,Avatar,Form,Switch,Button,Tooltip,message,Divider} from 'antd';
-import {EditOutlined,CameraOutlined,CopyOutlined,MailOutlined,WalletOutlined} from '@ant-design/icons';
+import {
+  Card, Avatar, Form, Switch, Button, Tooltip, message, Divider,
+} from 'antd';
+import {
+  EditOutlined, CameraOutlined, CopyOutlined, MailOutlined, WalletOutlined, SettingOutlined,
+  SaveOutlined, UserOutlined,
+} from '@ant-design/icons';
 import './setting.scss';
 import userService from '../../services/api/user';
 
@@ -37,12 +42,13 @@ function SettingsPanel() {
     <div className="settings-container">
       <Card className="settings-card">
         <div className="card-content-wrapper">
-          {/* User Profile Section */}
+          {/* Profile Section */}
           <div className="profile-section">
             <div className="avatar-container" onClick={handleAvatarClick}>
               <Avatar
                 className="user-avatar"
                 size={120}
+                icon={<UserOutlined />}
                 src="https://joeschmoe.io/api/v1/random"
               />
               <div className="avatar-overlay">
@@ -74,10 +80,13 @@ function SettingsPanel() {
 
           {/* Settings Section */}
           <div className="settings-section">
-            <h3 className="settings-title">ACCOUNT PREFERENCES</h3>
+            <h3 className="settings-title"><SettingOutlined /> ACCOUNT PREFERENCES</h3>
 
             <Form layout="vertical" className="preferences-form">
-              <Form.Item label={<span className="form-label">EMAIL NOTIFICATIONS</span>} className="setting-item">
+              <Form.Item
+                label={<span className="form-label"><MailOutlined /> EMAIL NOTIFICATIONS</span>}
+                className="setting-item"
+              >
                 <div className="setting-control">
                   <MailOutlined className="setting-icon" />
                   <Switch
@@ -93,9 +102,8 @@ function SettingsPanel() {
             </Form>
           </div>
 
-          {/* Save Button at Bottom */}
           <div className="save-button-container">
-            <Button type="primary" size="large" className="save-button">
+            <Button type="primary" size="large" icon={<SaveOutlined />} className="save-button">
               SAVE PREFERENCES
             </Button>
           </div>

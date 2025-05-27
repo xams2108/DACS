@@ -1,6 +1,7 @@
 import './Header.scss';
 import { useChartProvider } from '../../../../providers/chartProvider';
 import usePriceCoin from '../../../../hooks/usePriceCoin';
+import getCoins from "../../../../services/api/getCoins.api";
 import { useState, useEffect } from 'react';
 import { Typography, Tag, Space } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
@@ -8,16 +9,29 @@ import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 const { Text } = Typography;
 
 function Header() {
+  
   const { symbol, interval, setInterval } = useChartProvider();
   const listInterval = ['1m', '5m', '15m', '30m', '1h', '4h', '1d', '1w', '1M', '3M', '1y'];
-
   const { data: Coindata } = usePriceCoin(symbol, 'ticker');
-
+  const [coinInfo, setCoinInfo] = useState(null);
   const [price, setPrice] = useState(null);
   const [prevPrice, setPrevPrice] = useState(null);
   const [vol, setVol] = useState(null);
   const [percentChange, setPercentChange] = useState(null);
-  
+  useEffect(() => {
+    const fetchCoinInfo = async () => {
+      try {
+        const res = await getCoins(symbol);
+        if (res?.data?.length) {
+          setCoinInfo(res.data[0]); 
+        }
+      } catch (err) {
+        console.error("Lỗi getCoins:", err);
+      }
+    };
+
+    if (symbol) fetchCoinInfo();
+  }, [symbol]);
   useEffect(() => {
     if (Coindata?.data) {
       const { c, v, P } = Coindata.data;
@@ -32,6 +46,7 @@ function Header() {
       setPercentChange(parseFloat(P));
     }
   }, [Coindata]);
+ 
 
   const handleInterval = (item) => setInterval(item);
 
@@ -41,7 +56,8 @@ function Header() {
     <div className="chart-header">
       <div className="chart-header__left">
         <div className="chart-header__info">
-          <Text className="symbol">{symbol}</Text>
+          <img src={coinInfo?.icon} alt={coinInfo?.symbol} />
+          <Text className="symbol">{coinInfo?.symbol}</Text>
           {price !== null && (
             <Text className={`price ${isUp ? 'up' : 'down'}`}>
               {price.toFixed(2)}
@@ -61,7 +77,7 @@ function Header() {
             <Tag
               key={item}
               color={interval === item ? 'blue' : 'default'}
-              className="interval-tag"
+              className={`interval-tag ${interval === item ? 'active' : ''}`}
               onClick={() => handleInterval(item)}
             >
               {item}

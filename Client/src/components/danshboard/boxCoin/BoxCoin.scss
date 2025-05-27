@@ -1,82 +1,123 @@
-.BoxCoin-item{
-    padding: 15px;
-    border-radius: 10px;
-    height: 120px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
+@import '../../../variables';
+
+.BoxCoin-item {
+  padding: 15px;
+  border-radius: 10px;
+  height: 120px;
+  background-color: $background-secondary;
+  box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3); // neon xanh nhẹ
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+
+  &:hover {
+    box-shadow: 0 8px 20px rgba(29, 233, 182, 0.6);
+    transform: translateY(-3px);
+  }
+
+  &__header {
+    padding-left: 20px;
     display: flex;
-    
-    &__header{
-        padding-left: 20px;
-        display: flex;
-        align-items: center;
-        margin-right: 50px;
-        &__title{
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-left: 5px ;
-        }
-        &__icon{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            img{
-                width: 30px;
-                height: 30px;
-            }
-            :hover{
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                border-radius: 50%;
-                transform: scale(1.2);
-              
-            }
-        }
-    }
-    &__body{
-        display: flex;
-        flex-direction: column;
-        
-        
-        
-        &__top{
-            display: flex;
-            width: 100%;
-            &__price{
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-            }
-            &__change{
-                font-size: 16px;
-                color: #999;
-                &--up{
-                    color: green;
-                }
-                &--down{
-                    color: red;
-                }
-            }
-        }
-        &__bottom {
-            &__buy {
-                .button {
-                    background: linear-gradient(90deg, #4e8667, #0b7c2d); 
-                    border: none; 
-                    color: white;
-        
-                    
-                }
-                
-            }
-            
-        }
-       
+    align-items: center;
+    margin-right: 50px;
+
+    &__title {
+      font-size: 24px;
+      font-weight: bold;
+      color: $text-primary;
+      margin-left: 5px;
+      user-select: none;
     }
 
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: darken($background-secondary, 5%);
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      &:hover {
+        box-shadow: 0 8px 16px rgba(0, 230, 118, 0.4);
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      &__price {
+        font-size: 20px;
+        font-weight: bold;
+        color: $text-primary;
+        user-select: text;
+      }
+
+      &__change {
+        font-size: 16px;
+        user-select: text;
+
+        &--up {
+          color: $component-color;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          svg {
+            color: $component-color;
+            font-size: 18px;
+          }
+        }
+
+        &--down {
+          color: #ff4d4f; // đỏ neon nhẹ
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          svg {
+            color: #ff4d4f;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    &__bottom {
+      &__buy {
+        .button {
+          background: linear-gradient(90deg, $component-color, $component-hover);
+          border: none;
+          color: $background-color;
+          font-weight: 600;
+          border-radius: 20px;
+          padding: 6px 20px;
+          box-shadow: 0 5px 15px rgba(0, 230, 118, 0.4);
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+          user-select: none;
+
+          &:hover,
+          &:focus {
+            background: $component-hover;
+            box-shadow: 0 6px 20px rgba(29, 233, 182, 0.6);
+            color: $background-color;
+          }
+        }
+      }
+    }
+  }
 }
