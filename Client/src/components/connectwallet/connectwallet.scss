@@ -1,8 +1,8 @@
-@import '../../variables';
+@use '../../variables' as *;
 
 .tw-connect-wallet {
-  background-color: $background-secondary !important; // nền phụ tối
-  color: $text-primary !important; // chữ trắng
+  background-color: $background-secondary !important; 
+  color: $text-primary !important;                    
   border: 1px solid $border-color !important;
   padding: 10px 15px !important;
   border-radius: 20px !important;
@@ -21,11 +21,14 @@
 .tw-connected-wallet {
   border-radius: 20px !important;
   margin-left: 20px !important;
-  background-color: rgba(0, 230, 118, 0.7) !important; // màu xanh neon nhẹ
-  color: $background-color !important;
+  background-color: $background-secondary !important;  
+  color: $background-color !important;                
+  border: 1px solid rgba($component-color, 0.5) !important;  
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background-color: $component-hover !important;
+    border-color: $component-hover !important;
     box-shadow: rgba(29, 233, 182, 0.6) 0px 6px 20px !important;
   }
 }
+

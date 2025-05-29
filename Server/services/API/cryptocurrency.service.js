@@ -3,7 +3,7 @@ const axios = require('axios');
 const getIntervalMilliseconds = require('../../helper/getIntervalMilliseconds.helper');
 
 // Lấy danh sách symbol
-exports.getSymbols = async (query) => {
+module.exports.getSymbols = async (query) => {
     const find = { status: 'TRADING' };
 
     if (query.search && query.search.trim() !== '') {
@@ -15,9 +15,14 @@ exports.getSymbols = async (query) => {
 
     return await Symbols.find(find).limit(limit);
 };
+// Lấy giá mới nhất
+module.exports.getPrice = async (query) => {
+    const response =  await (await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${query}`)).data
+    return response
+}
 
 // Lấy dữ liệu chart
-exports.getChart = async (params, query) => {
+module.exports.getChart = async (params, query) => {
     const symbol = params.symbol;
     const interval = params.interval;
     const validIntervals = ['1m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'];

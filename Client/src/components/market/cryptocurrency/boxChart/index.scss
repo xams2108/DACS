@@ -1,4 +1,4 @@
-@import '../../../../variables.scss';
+@use '../../../../variables.scss' as *;
 
 .box-chart {
   background-color: $background-secondary;

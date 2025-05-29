@@ -2,7 +2,8 @@ const thirdwebAuth = require('../../config/thirdwebAuth');
 const User = require('../../model/user.model');
 
 // Generate login payload (GET /auth/login)
-exports.generateLoginPayload = async ({ address, chainId }) => {
+module.exports.generateLoginPayload = async ({ address, chainId }) => {
+    
     if (!address) {
         throw new Error('Address is required');
     }
@@ -14,7 +15,7 @@ exports.generateLoginPayload = async ({ address, chainId }) => {
 };
 
 // Handle user login (POST /auth/login)
-exports.loginUser = async (payload) => {
+module.exports.loginUser = async (payload) => {
     const verifiedPayload = await thirdwebAuth.verifyPayload(payload);
     if (!verifiedPayload.valid) {
         throw new Error('Failed to login');
@@ -33,7 +34,7 @@ exports.loginUser = async (payload) => {
 };
 
 // Check if user is logged in (GET /auth/isLoggedIn)
-exports.checkLoggedIn = async (jwt) => {
+module.exports.checkLoggedIn = async (jwt) => {
     if (!jwt) {
         return false;
     }
@@ -43,6 +44,6 @@ exports.checkLoggedIn = async (jwt) => {
 };
 
 // Logout user (GET /auth/logout)
-exports.logoutUser = async (res) => {
-    res.clearCookie("jwt");
+module.exports.logoutUser = async (res) => {
+    res.clearCookie("connect.sid")
 };

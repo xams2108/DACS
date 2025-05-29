@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import './index.scss';
 import getCoins from "../../../../services/api/getCoins.api";
 import { useChartProvider } from "../../../../providers/chartProvider";
-import SymbolItem from "./symbolItem";
+import SymbolItem from "./SymbolItem";
 
 const { Search } = Input;
 

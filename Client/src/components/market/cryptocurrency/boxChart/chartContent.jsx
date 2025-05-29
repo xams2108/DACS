@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
-import CardItem from '../../../../components/cardItem';
+import CardItem from '../../../cardItem';
 import { createChart } from 'lightweight-charts';
 import getChartData from '../../../../services/api/getChartData';
 import './content.scss';
 import { useChartProvider } from '../../../../providers/chartProvider';
 import usePriceCoin from '../../../../hooks/usePriceCoin';
 
-function ChartContent() {
+function Content() {
   const chartContainer = useRef(null);
   const refToolTip = useRef(null);
   const refLegend = useRef(null);
@@ -262,4 +262,4 @@ function ChartContent() {
   );
 }
 
-export default ChartContent;
+export default Content;

@@ -1,12 +1,11 @@
-
 const mongoose = require("mongoose");
 
-const symbolSchema = new mongoose.Schema({
-  symbol: { type: String, required: true, unique: true },
-  baseAsset: { type: String, required: true },
-  quoteAsset: { type: String, required: true },
-  status: { type: String, required: true },
+const notifySchema = new mongoose.Schema({
+  address: {type: String, required: true},
+  symbol: { type: String, required: true},
+  price: { type: Number, required: true},
+  success: { type: Boolean, default: false},
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("Symbol", symbolSchema);
+module.exports = mongoose.model("Notify", notifySchema);

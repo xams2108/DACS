@@ -1,4 +1,4 @@
-@import '../../../variables'; // giả sử bạn có biến màu ở đây
+@use '../../../variables' as *; // giả sử bạn có biến màu ở đây
 
 .trending-card {
   width: 100%;

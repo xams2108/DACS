@@ -1,3 +1,4 @@
+
 import { getData, postData } from "../../utils/apiRequest";
 const userService = {
     getUser: async () => {
@@ -16,6 +17,24 @@ const userService = {
             return data;
         } catch (error) {
             console.error('Lỗi khi cập nhật thông tin người dùng:', error.message);
+            throw error;
+        }
+    },
+    createOTP: async(payload) =>{
+        try{
+            const data = await postData(`api/user/otp`, payload);
+            return data;
+        }catch(error){
+            console.error('Lỗi khi gửi otp:', error.message);
+            throw error;
+        }
+    },
+    verifyOTP: async(payload) => {
+        try{
+            const data = await postData(`api/user/verifyOtp`, payload);
+            return data;
+        }catch(error){
+            console.error('Lỗi khi verify OTP', error.message);
             throw error;
         }
     }

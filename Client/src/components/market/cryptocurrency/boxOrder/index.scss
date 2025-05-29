@@ -1,4 +1,4 @@
-@import '../../../../variables.scss';
+@use '../../../../variables.scss' as *;
 
 .BoxOrder {
   display: flex;
@@ -49,11 +49,11 @@
   }
 
   &__Body {
-    flex: 1;
     box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     background: $background-secondary;
     overflow-y: auto;
     color: $text-primary;
+    border-color: $component-color;
   }
 }

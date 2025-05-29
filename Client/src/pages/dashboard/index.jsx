@@ -8,7 +8,6 @@ function Dashboard() {
    
   return(
     <>  
-        
         <TopCoin/>
         <Row gutter={[20,20]} className='mt-20'>
             <Col xxl={16} xl={16} lg={16} md={24} sm={24} xs={24}>

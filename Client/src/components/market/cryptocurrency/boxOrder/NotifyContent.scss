@@ -1,49 +1,106 @@
-@import '../../../../variables.scss';
+@use "../../../../variables.scss" as *;
 
 .NotifyContent {
-  height: 100%;
-  background: linear-gradient(90deg, rgba($background-secondary, 0.9), rgba($background-color, 0.95));
-  color: $text-primary;
+  background-color: $background-secondary;
 
+  border-radius: 12px;
+  padding-bottom: 40px;
+  color: $text-primary;
+  
   &__Title {
-    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    background-color: $background-secondary;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 20px;
+    background-color: rgb(78, 92, 92);
+  
+    
 
     &__Icon img {
-      width: 36px;
-      height: 36px;
-      margin-right: 8px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-      &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      }
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     &__Symbol {
-      font-family: 'Roboto', sans-serif;
-      background-color: $component-color;
-      border-radius: 20px;
-      padding: 10px 30px;
-      color: $text-primary;
-      font-size: 16px;
       font-weight: 600;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s;
+      font-size: 20px;
+      color: $text-primary;
+    }
+  }
 
-      &:hover {
-        background-color: $component-hover;
+  &__Input {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 6px;
+
+    &__Label  {
+      
+      font-size: 20px;
+      color: $text-primary;
+      font-weight: 600;
+      transition: 0.5s;
+      &:hover{
+        
+        color: $component-hover;
+      }
+    }
+
+    &__Value__Input {
+      width: 100%;
+      color: white !important;
+      background-color: transparent !important;
+      border-color: aliceblue !important;
+      font-size: 20px;
+      margin-bottom: 30px;
+      font-weight: bold;
+      &:focus,&::placeholder,&:hover {
+        background-color: transparent !important;
+        border-color: $component-hover !important;
+      }
+      input {
+        color: white !important;
+      }
+      .ant-input-number-handler-wrap {
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+
+        .ant-input-number-handler {
+          height: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $text-primary; // màu icon
+          background-color: $component-hover; // nền
+          border-top: 1px solid #ccc;
+
+          &:hover {
+            background-color: $component-hover;
+          }
+        }
+
+
+       }
+
+      
+      }
+
+    }
+  &__Submit{
+    padding-left: 20px;
+    padding-right: 20px;
+    &__Button{
+      background-color: $component-color;
+      padding: 20px;
+      width: 100%;
+      &:hover{
+        background-color: $component-hover !important;
       }
     }
   }

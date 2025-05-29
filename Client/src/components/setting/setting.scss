@@ -1,10 +1,9 @@
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
 
 .settings-container {
-  margin: 0 auto;
+  margin: 0;
   padding: 24px;
-  
-  height: 100%;
+  min-height: 100vh;
   background-color: $background-color;
   color: $text-primary;
 
@@ -12,16 +11,57 @@
     background-color: $background-secondary;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
     padding: 32px;
-    height: 85vh;
     display: flex;
     flex-direction: column;
+    height: 85vh;
+    max-height: 100vh;
 
+    &--not-logged-in {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      .not-logged-in {
+        width: 100%;
+
+        &__title {
+          font-size: 22px;
+          font-weight: 600;
+          color: $text-primary;
+          margin-bottom: 10px;
+        }
+
+        &__message {
+          font-size: 16px;
+          color: $text-secondary;
+          margin-bottom: 20px;
+        }
+
+        &__action {
+          button {
+            background-color: $component-color;
+            color: #000;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s;
+
+            &:hover {
+              background-color: $component-hover;
+              box-shadow: 0 0 10px $component-hover;
+            }
+          }
+        }
+      }
+    }
+
+    /* Phần nội dung scroll được */
     .card-content-wrapper {
+      flex: 1 1 auto;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
     .profile-section {
@@ -141,7 +181,7 @@
     }
 
     .settings-section {
-      flex: 1;
+      flex: 1 0 auto;
       overflow-y: auto;
 
       .settings-title {
@@ -189,8 +229,8 @@
     }
 
     .save-button-container {
-      margin-top: auto;
-      padding-top: 24px;
+      flex-shrink: 0;
+      margin-top: 24px;
 
       .save-button {
         width: 100%;
@@ -214,16 +254,26 @@
   .settings-container {
     padding: 16px;
 
-    .profile-section {
-      flex-direction: column;
-      text-align: center;
-      gap: 20px;
+    .settings-card {
+      padding: 20px;
 
-      .user-info {
-        width: 100%;
+      .profile-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
 
-        .wallet-info {
-          margin: 0 auto;
+        .user-info {
+          width: 100%;
+
+          .wallet-info {
+            margin: 0 auto;
+          }
+        }
+      }
+
+      .settings-section {
+        .settings-title {
+          text-align: center;
         }
       }
     }

@@ -1,0 +1,55 @@
+@use "../../../variables.scss" as *; // hoặc điều chỉnh path đúng với file biến của bạn
+
+.InputEmail {
+  background-color: transparent;
+
+  &__Content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__Label {
+      font-size: 20px;
+      color: $text-secondary;
+      margin-bottom: 4px;
+    }
+
+    &__Input {
+      .ant-input {
+        background-color: $background-color;
+        color: $text-primary;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+
+        &::placeholder {
+          color: $text-secondary;
+        }
+
+        &:hover,
+        &:focus {
+          border-color: $border-accent;
+          box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
+        }
+      }
+    }
+  }
+
+  &__Button {
+    margin-top: 40px;
+
+    .ant-btn {
+      width: 100%;
+      background-color: $component-color;
+      border-color: $component-color;
+      color: #000;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $component-hover !important;
+        border-color: $component-hover !important;
+      }
+    }
+  }
+}

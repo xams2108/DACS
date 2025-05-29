@@ -1,6 +1,6 @@
 import './index.scss'
 import { Col, Row } from 'antd';
-import Trending from './trending';
+import Trending from './TrendingBox';
 import dataTrending from '../../../services/api/cointrending.api'
 import { useEffect, useState } from 'react';
 function BoxTrending(){
