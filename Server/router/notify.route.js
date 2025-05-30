@@ -4,5 +4,5 @@ const Middleware = require("../middlewares/auth.middware")
 const router = express.Router()
 
 router.get("/", Middleware.authUser ,Controller.index)
-router.post("/postNotify",Middleware.authUser ,Controller.postNotify)
+router.post("/postOrder",Middleware.authUser ,Controller.postOrder)
 module.exports = router 

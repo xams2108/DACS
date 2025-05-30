@@ -7,7 +7,6 @@ import ConnectWallet from "../connectwallet";
 import ModalEmail from '../modal/Email';
 function SettingsPanel() {
   const { user } = useAuthProvider();
-  console.log(user)
   const [email, setEmail] = useState('user@example.com');
   const [avatar, setAvatar] = useState('null')
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)

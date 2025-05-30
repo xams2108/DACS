@@ -127,7 +127,7 @@
             transition: color 0.2s;
 
             &:hover {
-              color: lighten($accent-color, 10%);
+              color: $accent-color;
             }
           }
         }
@@ -145,7 +145,7 @@
           transition: background 0.2s;
 
           &:hover {
-            background: lighten($background-color, 5%);
+            background: $background-color;
 
             .copy-action {
               opacity: 1;

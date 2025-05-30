@@ -18,7 +18,7 @@
 
   .card-header {
     padding: 16px 20px;
-    background-color: darken($background-secondary, 5%);
+    background-color: $background-secondary;
     border-bottom: 1px solid $border-color;
 
     .header-title {
@@ -35,7 +35,7 @@
 
         &:hover {
           transform: scale(1.1);
-          color: lighten($component-color, 20%);
+          color: $component-color;
         }
       }
     }
@@ -51,7 +51,7 @@
       display: flex;
       align-items: center;
       padding: 12px 0;
-      border-bottom: 1px solid lighten($background-secondary, 5%);
+      border-bottom: 1px solid $background-secondary;
       transition: all 0.2s ease;
       cursor: pointer;
 
@@ -60,7 +60,7 @@
       }
 
       &:hover {
-        background-color: darken($background-secondary, 5%);
+        background-color: $background-secondary;
         transform: translateX(4px);
         box-shadow: 0 0 8px rgba(0, 230, 118, 0.4);
       }
@@ -176,7 +176,7 @@
   }
 
   .card-content::-webkit-scrollbar-track {
-    background: darken($background-secondary, 10%);
+    background: $background-secondary;
     border-radius: 3px;
   }
 
@@ -186,7 +186,7 @@
   }
 
   .card-content::-webkit-scrollbar-thumb:hover {
-    background: lighten($component-color, 15%);
+    background: $component-color;
   }
 }
 

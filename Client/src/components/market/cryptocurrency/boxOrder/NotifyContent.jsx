@@ -3,7 +3,8 @@ import { InputNumber, Button } from 'antd';
 import { useChartProvider } from '../../../../providers/chartProvider';
 import getCoins from '../../../../services/api/getCoins.api';
 import getPrice from '../../../../services/api/getPrice.api';
-import postNoti from '../../../../services/api/postNotificantion';
+import Service from '../../../../services/api/order.api';
+import { useNotification } from '../../../../providers/Notification';
 import './NotifyContent.scss';
 import ModalConfirm from '../../../modal/confirm';
 
@@ -12,7 +13,7 @@ function NotifyContent() {
   const [coin, setCoin] = useState(null);
   const [price, setPrice] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
+  const notification = useNotification();
   useEffect(() => {
     const fetchCoins = async () => {
       if (!symbol) return;
@@ -40,9 +41,15 @@ function NotifyContent() {
   const confimModal = async()  => {
     const data = {
       symbol: coin.symbol,
-      price: price
+      price: price,
+      type: "notify",
     }
-    await postNoti(data);
+    const res = await Service.postNoti(data);
+    if(res.success){
+      notification.success({ description: res.message })
+    }else{
+      notification.error({ description: "Order notification failed" })
+    }
     setIsOpen(false)
   }
   return (
