@@ -16,7 +16,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: lighten($background-secondary, 8%);
+      background-color: rgba($component-hover, 0.3);
     }
 
     &--active {
@@ -31,21 +31,40 @@
 
 
 .custom-search-input {
+  
   .ant-input-search-button {
-    background-color: $component-color !important;      
-    border-color: $component-color !important;
-    color: $background-color !important;                
+    background-color: $component-color !important;
+    color: $background-color !important;
+    border-color: rgba($component-color, 0.4);
     font-weight: 700 !important;
-    border-radius: 0 6px 6px 0 !important;              
+    border-radius: 0 6px 6px 0 !important;
 
     &:hover,
     &:focus {
-      background-color: $component-hover !important;    
-      border-color: $component-hover !important;
-      color: $background-secondary !important;         
-      box-shadow: none !important;
+      background-color: $component-hover !important;
+      border-color: rgba($component-hover, 0.6);
+      color: $background-secondary !important;
     }
   }
+
+  .ant-input-outlined{
+     .ant-input{
+      color: $text-primary;
+      &::placeholder {
+      color: $text-primary !important; 
+      opacity: 1;
+    }
+     }
+    
+    background-color: $background-secondary;
+    border-color: rgba($component-color, 0.4);
+    &:hover,
+    &:focus {
+    border-color: rgba($component-hover, 0.6);
+    }
+  }
+
+ 
 }
 
 

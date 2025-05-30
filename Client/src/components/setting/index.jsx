@@ -2,25 +2,24 @@ import React, { useState, useEffect } from 'react';
 import {Card,Avatar,Form,Switch,Button,Tooltip,message,Divider,} from 'antd';
 import {EditOutlined,CameraOutlined,CopyOutlined,MailOutlined,WalletOutlined,SettingOutlined,SaveOutlined,UserOutlined,} from '@ant-design/icons';
 import './setting.scss';
-import userService from '../../services/api/user';
 import { useAuthProvider } from '../../providers/authProvider';
 import ConnectWallet from "../connectwallet";
 import ModalEmail from '../modal/Email';
 function SettingsPanel() {
-  const { isLogin } = useAuthProvider();
+  const { user } = useAuthProvider();
+  console.log(user)
   const [email, setEmail] = useState('user@example.com');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [avatar, setAvatar] = useState('null')
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   const [walletAddress, setWalletAddress] = useState('null');
   const [isOpen, setIsOpen] = useState(false)
-
   useEffect(() => {
-    (async () => {
-        const { user } = await userService.getUser();
-        setEmail(user.email || 'user@gmail.com.com');
-        setWalletAddress(user.address);
-        setNotificationsEnabled(user.statusNotify);
-    })();
-  }, [isLogin, isOpen]);
+    setEmail(user?.email || 'user@example.com');
+    setAvatar(user?.avatar)
+    setWalletAddress(user?.address)
+    setNotificationsEnabled(user?.statusNotify)
+  
+  }, [isOpen,user]);
 
   const handleAvatarClick = () => {
     message.info('Avatar update feature coming soon!');
@@ -38,7 +37,7 @@ function SettingsPanel() {
   return (
     <>
       <ModalEmail isOpen={isOpen} onClose={CloseModal}/>
-      {isLogin ? (
+      {user ? (
         <div className="settings-container">
           <Card className="settings-card">
             <div className="card-content-wrapper">
@@ -49,7 +48,7 @@ function SettingsPanel() {
                     className="user-avatar"
                     size={120}
                     icon={<UserOutlined />}
-                    src="https://joeschmoe.io/api/v1/random"
+                    src={avatar}
                   />
                   <div className="avatar-overlay">
                     <CameraOutlined className="edit-icon" />
