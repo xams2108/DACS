@@ -1,14 +1,18 @@
-const binanceSocket = require('./binance.socket');
+const socketAuthMiddleware = require('../middlewares/socketAuth.middlewares');
+const initPublicSocket = require('./public');
+const initPrivateSocket = require('./private');
+
 module.exports = (io) => {
-  io.on('connection', (socket) => {
-    console.log(`📡 New socket connected: ${socket.id}`);
-    binanceSocket(socket);
+  const publicNamespace = io.of('/public');
+  publicNamespace.on('connection', (socket) => {
+    initPublicSocket(socket, publicNamespace);
+  });
 
-
-
+  // Namespace: /private — có xác thực
+  const privateNamespace = io.of('/private');
+  privateNamespace.use(socketAuthMiddleware);
+  privateNamespace.on('connection', (socket) => {
+    initPrivateSocket(socket, privateNamespace);
     
-    socket.on('disconnect', () => {
-      console.log(`❌ Disconnected: ${socket.id}`);
-    });
   });
 };

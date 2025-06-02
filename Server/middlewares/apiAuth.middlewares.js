@@ -13,7 +13,7 @@ module.exports.authUser = async (req, res, next) => {
     const authResult = await thirdwebAuth.verifyJWT({ jwt });
 
     if (!authResult.valid) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: 'Unauthorized2' });
     }
 
     const address = authResult?.parsedJWT?.sub;

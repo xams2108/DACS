@@ -10,7 +10,15 @@ const userService = {
             throw error;
         }
     },
-
+    getJwt: async () => {
+        try {
+            const data = await getData(`api/user/jwt`);
+            return data;
+        } catch (error) {
+            console.error('Lỗi khi lấy jwt từ server', error.message);
+            throw error;
+        }
+    },
     updateUser: async (payload) => {
         try {
             const data = await postData(`api/user`, payload);

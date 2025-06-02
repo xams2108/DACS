@@ -44,7 +44,7 @@ function NotifyContent() {
       price: price,
       type: "notify",
     }
-    const res = await Service.postNoti(data);
+    const res = await Service.postOrder(data);
     if(res.success){
       notification.success({ description: res.message })
     }else{

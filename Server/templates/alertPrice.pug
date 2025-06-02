@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title OTP Verification Email
+    title Price Alert Notification
     style.
       body {
         background-color: #0d1117;
@@ -28,17 +28,21 @@ html(lang="en")
         margin-bottom: 10px;
       }
 
-      .otp-code {
-        font-size: 36px;
-        font-weight: bold;
-        color: #1de9b6;
-        margin: 20px 0;
-      }
-
       .message {
         font-size: 16px;
         color: #c9d1d9;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .highlight {
+        color: #66bb6a;
+        font-weight: bold;
+      }
+
+      .warning {
+        color: #ff9800;
+        font-weight: bold;
       }
 
       .footer {
@@ -67,11 +71,21 @@ html(lang="en")
 
   body
     .email-container
-      .header 🔐 Your OTP Code
+      .header 📈 Price Alert Triggered for #{symbol}!
       .message
-        | Use the following OTP to continue your action. This code is valid for the next 3 minutes:
-      .otp-code #{otpCode}
+        | Hello
+        span.highlight(style="margin-left: 4px;") #{email},
+        br
+        | The price for your selected asset has crossed your target.
+      .message
+        | 🎯 Your Target Price: 
+        span.warning $#{targetPrice}
+        br
+        | 📉 Current Price: 
+        span.highlight $#{currentPrice}
       if actionLink
-        a.action-button(href=actionLink) Verify Now
+        a.action-button(href=actionLink target="_blank") View Dashboard
       .footer
-        | If you did not request this email, please ignore it.
+        | This is an automated message. Do not reply.
+        br
+        | Thank you for using our trading platform.

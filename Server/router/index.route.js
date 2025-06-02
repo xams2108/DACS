@@ -1,5 +1,5 @@
 const authAPIRoute = require("./auth.route")
-const orderAPIRoute = require("./notify.route")
+const orderAPIRoute = require("./order.route")
 const cryptocurrencyAPIRoute = require("./cryptocurrency.route")
 const userAPIRoute = require("./user.route")
 module.exports = (app) => {

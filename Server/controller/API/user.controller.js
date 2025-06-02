@@ -4,6 +4,9 @@ module.exports.index = async (req, res) => {
     return res.status(200).json({ message: "User data", user: req.user });
 
 };
+module.exports.jwt = async( req, res) => {
+    return res.status(200).json({ sucsess: true, jwt: req.session.jwt });
+}
 module.exports.ChangeInfo = async(req,res) => {
     
 }

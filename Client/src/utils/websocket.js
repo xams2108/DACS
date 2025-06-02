@@ -1,45 +1,58 @@
 // utils/websocketUtil.js
 import { io } from 'socket.io-client';
 
-let socket = null;
-
 const SOCKET_SERVER_URL = import.meta.env.VITE_APP_WS_URL;
+const sockets = {
+  public: null,
+  private: null,
+};
 
-const connect = (token = null) => {
-  if (!socket) {
-    const options = token
-      ? { transports: ['websocket'], auth: { token }, withCredentials: true }
-      : { transports: ['websocket'], withCredentials: true };
-    socket = io(SOCKET_SERVER_URL, options);
-    socket.on('connect', () => {
-      console.log('🟢 Connected:', socket.id);
-    });
+const connect = (type = 'public', token = null) => {
+  const namespace = type === 'private' ? '/private' : '/public';
 
-    socket.on('disconnect', () => {
-      console.log('🔴 Disconnected');
-    });
+  if (sockets[type]) return; // Đã kết nối rồi
 
-    socket.on('connect_error', (err) => {
-      console.error('❌ Connection error:', err.message);
-    });
+  const url = SOCKET_SERVER_URL + namespace;
+  const options = {
+    transports: ['websocket'],
+    withCredentials: true,
+    ...(token ? { auth: { token } } : {}),
+  };
+
+  const socket = io(url, options);
+
+  socket.on('connect', () => {
+    console.log(`🟢 Connected (${type}):`, socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`🔴 Disconnected (${type})`);
+  });
+
+  socket.on('connect_error', (err) => {
+    console.error(`❌ Connection error (${type}):`, err.message);
+  });
+
+  sockets[type] = socket;
+};
+
+const send = (type, event, data) => {
+  sockets[type]?.emit(event, data);
+};
+
+const on = (type, event, callback) => {
+  sockets[type]?.on(event, callback);
+};
+
+const off = (type, event, callback) => {
+  sockets[type]?.off(event, callback);
+};
+
+const disconnect = (type) => {
+  if (sockets[type]) {
+    sockets[type].disconnect();
+    sockets[type] = null;
   }
-};
-
-const send = (event, data) => {
-  socket?.emit(event, data);
-};
-
-const on = (event, callback) => {
-  socket?.on(event, callback);
-};
-
-const off = (event, callback) => {
-  socket?.off(event, callback);
-};
-
-const disconnect = () => {
-  socket?.disconnect();
-  socket = null;
 };
 
 export default {

@@ -1,4 +1,4 @@
-const socketController = require('../controller/WS/priceSocket.controller');
+const socketController = require('../../controller/WS/priceSocket.controller');
 
 module.exports = (socket) => {
   socket.on('subscribe:token', ({ symbol, streams }) => {

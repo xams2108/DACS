@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
 import websocketUtil from '../utils/websocket';
 
-const useRealtimePrice = (symbol, streams) => {
+const useRealtimePrice = (symbol, streams = 'ticker') => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (!symbol) return;
+    if (!symbol || !streams) return;
+    const namespace = 'public';
+    const eventName = `price:update:${symbol}@${streams}`;
+    websocketUtil.connect(namespace);
+    websocketUtil.send(namespace, 'subscribe:token', { symbol, streams });
 
-    websocketUtil.connect();
-    websocketUtil.send('subscribe:token', { symbol, streams });
-    const handlePriceUpdate = (data1) => {
-      setData(data1);
+    const handlePriceUpdate = (incomingData) => {
+      setData(incomingData);
     };
-
-    websocketUtil.on(`price:update:${symbol}@${streams}`, handlePriceUpdate);
+    websocketUtil.on(namespace, eventName, handlePriceUpdate);
 
     return () => {
-      websocketUtil.send('unsubscribe:token', { symbol, streams });
-      websocketUtil.off(`price:update:${symbol}@${streams}`, handlePriceUpdate);
-      websocketUtil.disconnect();
+      websocketUtil.send(namespace, 'unsubscribe:token', { symbol, streams });
+      websocketUtil.off(namespace, eventName, handlePriceUpdate);
+      websocketUtil.disconnect("public")
+      
     };
   }, [symbol, streams]);
 

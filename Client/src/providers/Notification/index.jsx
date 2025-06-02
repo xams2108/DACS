@@ -1,6 +1,9 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { notification } from 'antd';
-import "./styles.scss";
+import websocketUtil from '../../utils/websocket';
+import userService from '../../services/api/user';
+import { useAuthProvider } from '../authProvider';
+import './styles.scss';
 
 const NotificationContext = createContext(null);
 
@@ -8,8 +11,9 @@ export const useNotification = () => useContext(NotificationContext);
 
 export default function NotificationProvider({ children }) {
   const [api, contextHolder] = notification.useNotification();
+  const { user } = useAuthProvider();
 
-  // Hàm helper để gán mặc định className, nếu có className thì ghép thêm, không thì chỉ class mặc định
+  // Helper để thêm class cho notification
   const withDefaultClass = (baseClass, config = {}) => {
     const existingClass = config.className || '';
     return {
@@ -30,6 +34,41 @@ export default function NotificationProvider({ children }) {
     warning: (config) =>
       api.warning(withDefaultClass('custom-notification custom-notification-warning', config)),
   };
+
+  useEffect(() => {
+    let isMounted = true; 
+
+    const notifyHandler = (data) => {
+      console.log('📩 Notify:', data);
+      customApi.success({
+        message: `Thông báo ${data.action.toUpperCase()} - ${data.symbol}`,
+        description: `Giá hiện tại: ${data.currentPrice} (mục tiêu: ${data.targetPrice})`,
+        placement: 'topRight',
+      });
+      };
+
+    const initWebSocket = async () => {
+      try {
+        const { jwt } = await userService.getJwt();
+
+        if (!jwt || !isMounted) return;
+
+        websocketUtil.connect('private', jwt);
+        websocketUtil.on('notify', notifyHandler);
+      } catch (err) {
+        console.error('❌ Lỗi khi lấy JWT hoặc kết nối socket:', err);
+      }
+    };
+
+    initWebSocket();
+
+    return () => {
+      isMounted = false;
+      websocketUtil.off('notify', notifyHandler);
+      websocketUtil.disconnect('private');
+    };
+  }, [user]);
+
 
   return (
     <NotificationContext.Provider value={customApi}>

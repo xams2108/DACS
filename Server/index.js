@@ -26,15 +26,16 @@ app.use(session({
   secret: process.env.ADMIN_PRIVATE_KEY, // Khóa bí mật, bạn thay bằng chuỗi phức tạp hơn nhé
   resave: false,                      // Không lưu session nếu chưa thay đổi
   saveUninitialized: false,           // Không tạo session mới nếu chưa dùng
-
 }));
 app.use(bodyParser.json());
 
 // Khởi tạo server HTTP và Socket.io
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {origin: "*",}
 });
+global._io = io;
 const socket = require("./socket/index");
 socket(io); 
 
@@ -45,7 +46,10 @@ route(app);
 
 // Kết nối database và khởi động server
 database.connect();
+
+const { startOrderNotifier } = require('./jobs/orderNotifier');
 server.listen(port, () => {
+  startOrderNotifier()
   console.log(`🚀 Server running at http://localhost:${port}`);
   console.log(`📡 Socket.IO running at ws://localhost:${port}`);
 });
