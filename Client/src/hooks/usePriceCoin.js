@@ -19,7 +19,6 @@ const useRealtimePrice = (symbol, streams = 'ticker') => {
     return () => {
       websocketUtil.send(namespace, 'unsubscribe:token', { symbol, streams });
       websocketUtil.off(namespace, eventName, handlePriceUpdate);
-      websocketUtil.disconnect("public")
       
     };
   }, [symbol, streams]);

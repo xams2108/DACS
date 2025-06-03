@@ -41,23 +41,23 @@ export default function NotificationProvider({ children }) {
     const notifyHandler = (data) => {
       console.log('📩 Notify:', data);
       customApi.success({
-        message: `Thông báo ${data.action.toUpperCase()} - ${data.symbol}`,
-        description: `Giá hiện tại: ${data.currentPrice} (mục tiêu: ${data.targetPrice})`,
+        message: `${data.symbol} ${data.action === 'buy' ? '⬇️' : '⬆️'} ${parseFloat(data.currentPrice).toFixed(2)}`,
+        description: `Target price: ${data.targetPrice.toFixed(2)}`,
         placement: 'topRight',
       });
       };
 
     const initWebSocket = async () => {
-      try {
-        const { jwt } = await userService.getJwt();
+    try {
+      const { jwt } = await userService.getJwt();
 
-        if (!jwt || !isMounted) return;
+      if (!jwt || !isMounted) return;
 
-        websocketUtil.connect('private', jwt);
-        websocketUtil.on('notify', notifyHandler);
-      } catch (err) {
-        console.error('❌ Lỗi khi lấy JWT hoặc kết nối socket:', err);
-      }
+      websocketUtil.connect('private', jwt);
+      websocketUtil.on('private', 'notify', notifyHandler);
+    } catch (err) {
+      console.error('❌ Lỗi khi lấy JWT hoặc kết nối socket:', err);
+    }
     };
 
     initWebSocket();

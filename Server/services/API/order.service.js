@@ -85,9 +85,9 @@ module.exports.checkAndNotify = async () => {
 
         const socketId = await userSockets.getSocketByAddress(address);
         const payload = { symbol, currentPrice, targetPrice, action, time: new Date() };
-
+        console.log(socketId)
         if (socketId) {
-          _io.of('/private').to(socketId).emit('notify', payload);
+          global._io.of('/private').to(socketId).emit('notify', payload);
         }
 
         const userHasNotify = users.find(user => user.address === address);
