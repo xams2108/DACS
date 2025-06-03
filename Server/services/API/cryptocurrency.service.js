@@ -10,11 +10,15 @@ module.exports.getSymbols = async (query) => {
         const searchRegex = new RegExp(query.search, 'i');
         find.symbol = { $regex: searchRegex };
     }
-
-    const limit = query.limit ? parseInt(query.limit) : 30;
-
+    let limit = query.limit ? parseInt(query.limit) : 30;
+    if(query.symbol){
+        find.symbol = query.symbol.toUpperCase()
+        limit = 1
+    }
     return await Symbols.find(find).limit(limit);
+    
 };
+
 // Lấy giá mới nhất
 module.exports.getPrice = async (query) => {
     const response =  await (await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${query}`)).data

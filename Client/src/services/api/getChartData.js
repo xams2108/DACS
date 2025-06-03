@@ -3,7 +3,8 @@ import { getData } from "../../utils/apiRequest";
 const getChartData = async (params) => {
     const symbol = params.symbol;
     const interval = params.interval;
-    const skip = params.skip || '0'
+    const skip = params.skip || 0
+    const limt = params.limit || 100
     
     try {
         if (!symbol || typeof symbol !== 'string') {
@@ -12,7 +13,7 @@ const getChartData = async (params) => {
         if (!interval || typeof interval !== 'string') {
             throw new Error('Interval must be a non-empty string');
         }
-        const data = await getData(`api/market/cryptocurrency/chart/${symbol}/${interval}?skip=${skip}`);
+        const data = await getData(`api/market/cryptocurrency/chart/${symbol}/${interval}?skip=${skip}&limit=${limt}`);
         return data;
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu biểu đồ:', error.message);

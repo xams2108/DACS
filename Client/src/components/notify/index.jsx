@@ -73,7 +73,7 @@ function Notify() {
                     </div>
                     <div className="notify-item__time">{item.timestamp}</div>
                 </div>
-            </div>
+            </div>  
         ),
     }));
 

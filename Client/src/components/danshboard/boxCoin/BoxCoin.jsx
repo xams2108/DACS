@@ -1,61 +1,64 @@
 import './BoxCoin.scss';
-import { Button, Tag  } from 'antd';
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import usePriceCoin from "../../../hooks/usePriceCoin"; 
+import getCoin from "../../../services/api/getCoins.api";
+import Chart from "./Chart";
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
-function BoxCoin({ title, icon, bgColor}) {
-    const priceData = usePriceCoin(title.toLowerCase() + 'usdt', 'ticker'); 
-    console.log(priceData);
-    const [previousPrice, setPreviousPrice] = useState(null);
-    const [priceChange, setPriceChange] = useState(0);
-    
-    useEffect(() => {
-        if (priceData && previousPrice !== null) {
-            setPriceChange(priceData.P);
-            setPreviousPrice(priceData.c); 
-            
-        } else if (priceData) {
-            setPreviousPrice(priceData.c); 
-        }
-    }, [priceData, previousPrice]);
-    return (
-        <div className="BoxCoin-item" style={{backgroundColor: bgColor}}>
-            <div className='BoxCoin-item__header'>
-                <div className="BoxCoin-item__header__icon">
-                    <img src={icon} alt="" />
-                </div>
-                <div className="BoxCoin-item__header__title">
-                    <h4> {title}</h4>
-                </div>
-                
-            </div>
-            <div className='BoxCoin-item__body'>
-                <div className='BoxCoin-item__body__top'>
-                    <div className='BoxCoin-item__body__top__price'>
-                        <p>{priceData ? parseFloat(priceData.c).toFixed(2) : 'Loading...'}</p> 
-                    </div>
-                    <div className={'BoxCoin-item__body__top__change' + (priceChange > 0 ? "--up" : "--down")}>
-                        <p>{priceChange > 0 ? 
-                            <>
-                                <CaretUpOutlined />  <Tag color="green">{priceChange}%</Tag> 
-                            </>:
-                            <>
-                                <CaretDownOutlined /> <Tag color="red">{priceChange}%</Tag>
-                            </>
-                            }</p>
-                    </div>
-                </div>
-                <div className='BoxCoin-item__body__bottom'>
-                    <div className='BoxCoin-item__body__bottom__buy'>
-                        <Button type="primary" className='button'>
-                            Buy Now
-                        </Button>
-                    </div>
-                </div>
-            </div>
+function BoxCoin({ symbol }) {
+  const [coinInfo, setCoinInfo] = useState(null);
+  const price = usePriceCoin(symbol + "usdt")?.data?.data;
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const response = await getCoin(symbol + "usdt", "symbol");
+        setCoinInfo(response.data[0]);
+      } catch (error) {
+        console.error("❌ Error fetching coin info:", error);
+      }
+    };
+
+    fetchInfo();
+  }, [symbol]);
+
+  const priceChangePercent = parseFloat(price?.P || 0);
+  const isUp = priceChangePercent >= 0;
+
+  return (
+    <div className="BoxCoin-item">
+      <div className="BoxCoin-item__left">
+        <div className='BoxCoin-item__left__header'>
+          <div className="BoxCoin-item__left__header__icon">
+            <img src={coinInfo?.icon} alt={symbol} />
+          </div>
+          <div className="BoxCoin-item__left__header__title">
+            {symbol.toUpperCase()}
+          </div>
         </div>
-    );
+
+        <div className='BoxCoin-item__left__bottom'>
+          <div className="BoxCoin-item__left__bottom__price">
+            ${parseFloat(price?.c || 0).toFixed(2)}
+          </div>
+
+          <div
+            className="BoxCoin-item__left__bottom__change"
+            style={{ color: isUp ? "#66bb6a" : "#f44336" }}
+          >
+            {isUp ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+            {" "}
+            {isUp ? "+" : ""}
+            {priceChangePercent.toFixed(2)}%
+          </div>
+        </div>
+      </div>
+
+      <div className="BoxCoin-item__right">
+        <Chart symbol={symbol + "usdt"} />
+      </div>
+    </div>
+  );
 }
 
 export default BoxCoin;

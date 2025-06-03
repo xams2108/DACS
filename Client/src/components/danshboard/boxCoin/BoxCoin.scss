@@ -1,123 +1,92 @@
-@use'../../../variables' as *;
+@use '../../../variables' as *;
 
 .BoxCoin-item {
-  padding: 15px;
-  border-radius: 10px;
-  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: $background-secondary;
-  box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3); // neon xanh nhẹ
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+  padding: 15px 20px;
+  height: 170px;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
-  display: flex;
 
   &:hover {
-    box-shadow: 0 8px 20px rgba(29, 233, 182, 0.6);
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(29, 233, 182, 0.6);
   }
 
-  &__header {
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-    margin-right: 50px;
-
-    &__title {
-      font-size: 24px;
-      font-weight: bold;
-      color: $text-primary;
-      margin-left: 5px;
-      user-select: none;
-    }
-
-    &__icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: $background-secondary, 5%;
-      img {
-        width: 30px;
-        height: 30px;
-      }
-
-      &:hover {
-        box-shadow: 0 8px 16px rgba(0, 230, 118, 0.4);
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  &__body {
+  &__left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
 
-    &__top {
+    &__header {
       display: flex;
-      justify-content: space-between;
-      width: 100%;
+      align-items: center;
+      margin-bottom: 8px;
 
-      &__price {
-        font-size: 20px;
-        font-weight: bold;
-        color: $text-primary;
-        user-select: text;
+      &__icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba($background-secondary, 0.05);
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
       }
 
-      &__change {
-        font-size: 16px;
-        user-select: text;
-
-        &--up {
-          color: $component-color;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-
-          svg {
-            color: $component-color;
-            font-size: 18px;
-          }
-        }
-
-        &--down {
-          color: #ff4d4f; // đỏ neon nhẹ
-          display: flex;
-          align-items: center;
-          gap: 5px;
-
-          svg {
-            color: #ff4d4f;
-            font-size: 18px;
-          }
-        }
+      &__title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $text-primary;
+        margin-left: 10px;
+        text-transform: uppercase; // nếu muốn chữ in hoa
       }
     }
 
     &__bottom {
-      &__buy {
-        .button {
-          background: linear-gradient(90deg, $component-color, $component-hover);
-          border: none;
-          color: $background-color;
-          font-weight: 600;
-          border-radius: 20px;
-          padding: 6px 20px;
-          box-shadow: 0 5px 15px rgba(0, 230, 118, 0.4);
-          transition: background-color 0.3s ease, box-shadow 0.3s ease;
-          user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
 
-          &:hover,
-          &:focus {
-            background: $component-hover;
-            box-shadow: 0 6px 20px rgba(29, 233, 182, 0.6);
-            color: $background-color;
-          }
+      &__price {
+        font-size: 18px;
+        font-weight: bold;
+        color: $text-primary;
+      }
+
+      &__change {
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        svg { 
+          font-size: 16px;
+          line-height: 0;
         }
       }
+    }
+  }
+
+  &__right {
+    flex: 1;
+    height: 100%;
+    padding-left: 20px;
+
+    > div {
+      height: 100%;
+      width: 100%;
     }
   }
 }

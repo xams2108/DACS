@@ -99,7 +99,7 @@ function Content() {
       },
     });
 
-    candlestickSeriesRef.current = chart.addCandlestickSeries({
+        candlestickSeriesRef.current = chart.addCandlestickSeries({
       upColor: '#66bb6a',
       downColor: '#f44336',
       borderVisible: false,
@@ -111,12 +111,14 @@ function Content() {
       priceFormat: {
         type: 'volume',
       },
-      priceScaleId: '',
+      priceScaleId: 'volume',
+      color: '#26a69a',
       scaleMargins: {
-        top: 0.8,
-        bottom: 0,
+        top: 0.85,
+        bottom: 0.0,
       },
     });
+
 
     // Set initial data
     candlestickSeriesRef.current.setData(transformedData);

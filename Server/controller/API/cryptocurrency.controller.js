@@ -15,6 +15,7 @@ exports.index = async (req, res) => {
         });
     }
 };
+
 // Get Price
 exports.price = async(req,res) => {
     try{
