@@ -4,6 +4,7 @@ const axios = require('axios');
 // GET Symbols
 exports.index = async (req, res) => {
     try {
+        
         const result = await cryptocurrencyService.getSymbols(req.query);
         res.status(200).json({ success: true, data: result });
     } catch (error) {

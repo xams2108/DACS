@@ -69,12 +69,12 @@ function Chart({ symbol }) {
 
         chartRef.current = chart;
         const lineSeries = chart.addLineSeries({
+
         color: dataChart[0]?.value < dataChart[dataChart.length - 1]?.value ? "#66bb6a" : "#f50057",
         lineWidth: 2,
         });
         lineSeries.setData(dataChart);
         chart.timeScale().fitContent(); 
-
     
     
 
@@ -92,7 +92,7 @@ function Chart({ symbol }) {
       style={{
         width: "100%",
         height: "100%",
-        position: "relative",
+        position: "relative"
       }}
     />
   );

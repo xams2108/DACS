@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Typography, Tag, Space } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
+
 const { Text } = Typography;
 
 function Header() {
@@ -21,7 +22,7 @@ function Header() {
   useEffect(() => {
     const fetchCoinInfo = async () => {
       try {
-        const res = await getCoins(symbol);
+        const res = await getCoins(symbol, "symbol");
         if (res?.data?.length) {
           setCoinInfo(res.data[0]); 
         }

@@ -1,5 +1,5 @@
 import { Layout, Row, Col } from 'antd';
-import Notify from '../components/notify';
+
 import MenuSider from '../components/menuSider';
 import ConnectWallet from '../components/connectwallet';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -30,7 +30,7 @@ function LayoutDefault() {
                     </div>
                     <div className='header__nav__right'>
                         <div className='header__nav__right__item'>
-                            <Notify />
+      
                             <ConnectWallet />
                         </div>
                     </div>

@@ -1,23 +1,20 @@
 import { Col, Row } from 'antd';
-import CartItem from '../../components/cardItem';
-import TopCoin from './topcoin'
-import Trending from './trending'
-import Overview from './overview'
+import BoxCoin from "../../components/danshboard/boxCoin"
+import BoxTrending from '../../components/danshboard/boxTrending'
+import BoxNews from "../../components/danshboard/boxNews"
 function Dashboard() {
-
-   
   return(
     <>  
-        <TopCoin/>
+        <BoxCoin/>
         <Row gutter={[20,20]} className='mt-20'>
-            <Col xxl={16} xl={16} lg={16} md={24} sm={24} xs={24}>
-                <Trending/>
+            <Col span={24}>
+                <BoxTrending/>
             </Col>
-            <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
-                <Overview/>
+            <Col span={24}>
+                <BoxNews/>
             </Col>
         </Row>
-      
+
     </>
   )
 }

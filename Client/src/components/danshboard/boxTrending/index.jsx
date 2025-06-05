@@ -21,10 +21,10 @@ function BoxTrending(){
         <>
             <div className='Box'>
                 <Row gutter={[20,40]}>
-                    <Col span={12}>
+                    <Col span={12} className="box-trending-col">
                         <Trending title="🚀Top Trending NFT"data={data.nfts}/>
                     </Col>
-                    <Col span={12}>
+                    <Col span={12} className="box-trending-col">
                         <Trending title="🔥Top Trending Coin🔥" data={data.coins}/>
                     </Col>
                 </Row>

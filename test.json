@@ -1,10 +1,71 @@
 {
-    "avatar": "https://img.freepik.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg?w=740",
-    "_id": "682cb07822e2684f41280f2a",
-    "address": "0xf3c737a1e0E96F7395A220CFE158171D9986A117",
-    "statusNotify": true,
-    "createdAt": "2025-05-20T16:40:24.743Z",
-    "updatedAt": "2025-05-20T16:40:24.743Z",
-    "__v": 0,
-    "email": "xams2108@gmail.com"
+    "TYPE": "121",
+    "ID": 45546727,
+    "GUID": "https://en.bitcoinsistemi.com/the-long-awaited-xrp-and-dogecoin-doge-announcement-from-coinbase-has-arrived/",
+    "PUBLISHED_ON": 1749119648,
+    "IMAGE_URL": "https://resources.cryptocompare.com/news/81/45546727.jpeg",
+    "TITLE": "The Long-Awaited XRP and Dogecoin (DOGE) Announcement from Coinbase Has Arrived!",
+    "SUBTITLE": null,
+    "AUTHORS": "Elif Azra Güven",
+    "URL": "https://en.bitcoinsistemi.com/the-long-awaited-xrp-and-dogecoin-doge-announcement-from-coinbase-has-arrived/",
+    "SOURCE_ID": 81,
+    "BODY": "Coinbase, the largest cryptocurrency exchange in the United States, made an unexpected announcement for Cardano (ADA), Dogecoin (DOGE), Litecoin (LTC) and Ripple (XRP) in the past weeks. Accordingly, the exchange announced that cbADA, cbDOGE, cbLTC and cbXRP, which are bridged versions of Cardano (ADA), Dogecoin (DOGE), Litecoin (LTC) and Ripple (XRP) coins to the Base network, will be released soon. Related News: Bitfinex Analysts Said \"The Rise or Fall in Bitcoin Depends on This Data!\" And Shared All the Price Levels They Expect From Now On! The exchange has now announced that this announcement has been implemented for DOGE and XRP. Accordingly, Coinbase announced that it has launched two new wrapping tokens called cbXRP and cbDOGE on the Layer 2 Ethereum network Base. Both tokens are backed 1:1 by XRP and DOGE, which are under the custody of Coinbase. The exchange said the aim of the launch of the new tokens is to enable cross-chain usage of XRP and Dogecoin within Base’s DeFi ecosystem. “The launch of these assets expands Coinbase’s wrapped asset offerings and makes it easier for anyone to participate in the on-chain economy through Base’s open and permissionless platform,” a Base spokesperson said. Coinbase stated that while cbXRP and cbDOGE are currently in development, cbLTC and cbADA will be released at a later date. *This is not investment advice. Continue Reading: The Long-Awaited XRP and Dogecoin (DOGE) Announcement from Coinbase Has Arrived!",
+    "KEYWORDS": "Altcoin|Analysis|Dogecoin|News|XRP",
+    "LANG": "EN",
+    "UPVOTES": 0,
+    "DOWNVOTES": 0,
+    "SCORE": 0,
+    "SENTIMENT": "POSITIVE",
+    "STATUS": "ACTIVE",
+    "CREATED_ON": 1749119666,
+    "UPDATED_ON": 1749119666,
+    "SOURCE_DATA": {
+        "TYPE": "120",
+        "ID": 81,
+        "SOURCE_KEY": "bitcoinsistemi",
+        "NAME": "BitcoinSistemi",
+        "IMAGE_URL": "https://resources.cryptocompare.com/news/81/default.png",
+        "URL": "https://en.bitcoinsistemi.com/feed/",
+        "LANG": "EN",
+        "SOURCE_TYPE": "RSS",
+        "LAUNCH_DATE": null,
+        "SORT_ORDER": 0,
+        "BENCHMARK_SCORE": 0,
+        "STATUS": "ACTIVE",
+        "LAST_UPDATED_TS": 1749116577,
+        "CREATED_ON": 1692873798,
+        "UPDATED_ON": 1692873836
+    },
+    "CATEGORY_DATA": [
+        {
+            "TYPE": "122",
+            "ID": 3,
+            "NAME": "ADA",
+            "CATEGORY": "ADA"
+        },
+        {
+            "TYPE": "122",
+            "ID": 20,
+            "NAME": "DOGE",
+            "CATEGORY": "DOGE"
+        },
+        {
+            "TYPE": "122",
+            "ID": 25,
+            "NAME": "EXCHANGE",
+            "CATEGORY": "EXCHANGE"
+        },
+        {
+            "TYPE": "122",
+            "ID": 33,
+            "NAME": "LTC",
+            "CATEGORY": "LTC"
+        },
+        {
+            "TYPE": "122",
+            "ID": 58,
+            "NAME": "XRP",
+            "CATEGORY": "XRP"
+        }
+    ]
 }

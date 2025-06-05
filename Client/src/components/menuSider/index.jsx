@@ -16,7 +16,7 @@ function MenuSider() {
             icon: <BarChartOutlined />,
             children: [
                 {
-                    label: <Link to="market/cryptocurrency">Cryptocurrency</Link>,
+                    label:<Link to="/market/cryptocurrency/BTCUSDT/15m">Cryptocurrency</Link>,
                     key: "cryptocurrency",
                     icon: <DollarOutlined />,
                 },

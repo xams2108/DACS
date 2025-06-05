@@ -1,7 +1,13 @@
-.Box{
-    padding: 20px;
+.Box {
+  padding: 20px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  .box-trending-col {
     height: 400px;
-    
+    display: flex;
+    flex-direction: column;
+    > div {
+      flex-grow: 1;
+    }
+  }
 }
-
-

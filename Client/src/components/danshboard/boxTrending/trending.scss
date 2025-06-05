@@ -5,6 +5,7 @@
   height: 32%;
   background-color: $background-secondary; // #161b22
   border-radius: 12px;
+  border: 1px solid $border-color;
   box-shadow: 0 4px 12px rgba(0, 230, 118, 0.2); // neon xanh nhẹ
   display: flex;
   flex-direction: column;

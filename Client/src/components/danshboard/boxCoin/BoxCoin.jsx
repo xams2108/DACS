@@ -1,14 +1,14 @@
 import './BoxCoin.scss';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import usePriceCoin from "../../../hooks/usePriceCoin"; 
 import getCoin from "../../../services/api/getCoins.api";
 import Chart from "./Chart";
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-
 function BoxCoin({ symbol }) {
   const [coinInfo, setCoinInfo] = useState(null);
   const price = usePriceCoin(symbol + "usdt")?.data?.data;
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchInfo = async () => {
       try {
@@ -24,9 +24,12 @@ function BoxCoin({ symbol }) {
 
   const priceChangePercent = parseFloat(price?.P || 0);
   const isUp = priceChangePercent >= 0;
-
+  const hanldeLink = () => {
+      navigate(`/market/cryptocurrency/${symbol+"USDT"}/15m`);
+  }
+  
   return (
-    <div className="BoxCoin-item">
+    <div className="BoxCoin-item" onClick={hanldeLink}>
       <div className="BoxCoin-item__left">
         <div className='BoxCoin-item__left__header'>
           <div className="BoxCoin-item__left__header__icon">

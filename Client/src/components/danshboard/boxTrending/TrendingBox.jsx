@@ -30,7 +30,7 @@ function TrendingNFT({ data = [], title }) {
     }
 
     return (
-        <Card className="trending-card">
+        <div className="trending-card">
             <div className="card-header">
                 <div className='header-title'>
                     <span>{title}</span>
@@ -62,7 +62,7 @@ function TrendingNFT({ data = [], title }) {
                     </div>
                 ))}
             </div>
-        </Card>
+        </div>
     );
 }
 

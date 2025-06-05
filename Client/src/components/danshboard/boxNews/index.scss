@@ -1,0 +1,91 @@
+@use "../../../variables.scss" as *;
+
+.box-news {
+  background-color: $background-secondary;
+  color: $text-primary;
+  height: 500px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid $border-color;
+
+    .box-news__title {
+      font-size: 25px;
+      font-weight: 600;
+      color: $component-color;
+      margin: 0;
+    }
+
+    .box-news__search {
+      width: 300px;
+
+      .ant-input-affix-wrapper {
+        background-color: $background-color;
+        color: $text-primary;
+        border-color: $border-color;
+
+        input.ant-input {
+          color: $text-primary;
+
+          &::placeholder {
+            color: $text-secondary;
+          }
+        }
+
+        &:hover {
+          border-color: $border-color;
+        }
+      }
+
+      .ant-btn {
+        background-color: $component-color;
+        border: none;
+        color: #000;
+
+        &:hover {
+          background-color: $component-hover !important;
+          color: $text-primary !important;
+        }
+      }
+    }
+  }
+
+  &__body {
+    padding: 15px;
+    flex: 1;
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    > * {
+      height: 140px;
+    }
+  }
+
+  &__loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    grid-column: 1 / -1;
+    
+  }
+
+  &__empty {
+    color: $text-secondary;
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 20px;
+  }
+}
