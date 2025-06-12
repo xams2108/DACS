@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
   type: {type: String,enum: ["notify", "trade"], require: true},
   symbol: { type: String, required: true},
   price: { type: Number, required: true},
-  action: {type: String,enum: ["buy", "sell"],default:"buy", require: true},
+  action: {type: String,enum: ["buy", "sell"], require: true},
   status: {
     type: String,
     enum: ['pending', 'success'],

@@ -5,11 +5,14 @@ import './News.scss';
 function News({ data }) {
   const { AUTHORS, BODY, IMAGE_URL, TITLE, URL, PUBLISHED_ON, SOURCE_DATA } = data;
   const date = new Date(PUBLISHED_ON * 1000);
-  const DATE = date.toLocaleDateString('en-US', {
+  const DATE = date.toLocaleString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  });
+    hour: 'numeric',
+    minute: 'numeric'
+});
+
   const SOURCE = SOURCE_DATA.NAME;
 
   const handleClick = () => {
