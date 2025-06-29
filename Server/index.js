@@ -1,6 +1,7 @@
 const express = require("express");
 const database = require("./config/database");
 const bodyParser = require("body-parser");
+const multer = require('multer'); 
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const http = require("http");
@@ -27,8 +28,12 @@ app.use(session({
   resave: false,                      // Không lưu session nếu chưa thay đổi
   saveUninitialized: false,           // Không tạo session mới nếu chưa dùng
 }));
-app.use(bodyParser.json());
 
+const storage = multer.memoryStorage(); // Lưu trữ file vào bộ nhớ đệm
+const upload = multer({ storage: storage }); // Tạo instance Multer
+
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true })); 
 // Khởi tạo server HTTP và Socket.io
 const server = http.createServer(app);
 
@@ -42,7 +47,7 @@ socket(io);
 
 // Route API
 const route = require("./router/index.route");
-route(app);
+route(app, upload); 
 
 // Kết nối database và khởi động server
 database.connect();

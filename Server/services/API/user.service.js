@@ -20,6 +20,30 @@ module.exports.getDataUser = async (jwt) => {
     }
     return user;
 };
+module.exports.updateUser = async (payload) => {
+    try {
+        const { address, avatar, statusNotify } = payload;
+        const user = await User.find({ address });
+        if(user){
+            const updatedUser = await User.updateOne(
+                { address },
+                { avatar, statusNotify }
+            );
+            return {
+                success: true,
+                message: 'User information updated successfully.',
+            };
+        }
+    }
+    catch (error) {
+        return {
+            success: false,
+            message: 'An error occurred while updating user information.',
+            error: error.message,
+        };
+    }
+  }
+
   module.exports.createOTP = async (email) => {
     try {
       const emailExists = await User.findOne({ email});

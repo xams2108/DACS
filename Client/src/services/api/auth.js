@@ -1,5 +1,4 @@
 import { getData, postData } from "../../utils/apiRequest";
-
 const authService = {
   async getLoginPayload(address, chainId) {
     return await getData(`api/auth/login?address=${address}&chainId=${chainId}`);

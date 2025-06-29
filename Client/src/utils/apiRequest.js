@@ -2,16 +2,16 @@ const API_URL = import.meta.env.VITE_APP_API_URL;
 const handleRequest = async (method, endpoint, data = null) => {
     const options = {
         method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {},
         credentials: 'include',
     };
 
-    if (data) {
+    if (data instanceof FormData) {
+        options.body = data;
+    } else if (data) {
         options.body = JSON.stringify(data);
+        options.headers['Content-Type'] = 'application/json';
     }
-
     try {
         const response = await fetch(`${API_URL}/${endpoint}`, options);
         

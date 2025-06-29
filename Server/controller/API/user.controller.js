@@ -8,6 +8,14 @@ module.exports.jwt = async( req, res) => {
     return res.status(200).json({ sucsess: true, jwt: req.session.jwt });
 }
 module.exports.ChangeInfo = async(req,res) => {
+    payload = {
+        ...req.body,
+        address: req.user.address
+    }
+    const result = await userService.updateUser(payload);
+    return res.status(200).json(result);
+    
+    
     
 }
 module.exports.Otp = async (req, res) => {

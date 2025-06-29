@@ -1,41 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import {Card,Avatar,Form,Switch,Button,Tooltip,message,Divider,} from 'antd';
-import {EditOutlined,CameraOutlined,CopyOutlined,MailOutlined,WalletOutlined,SettingOutlined,SaveOutlined,UserOutlined,} from '@ant-design/icons';
+import React, { useState, useEffect, useRef } from 'react';
+import { Card, Avatar, Form, Switch, Button, Tooltip, Divider, message } from 'antd'; // Import message
+import { EditOutlined, CameraOutlined, CopyOutlined, MailOutlined, WalletOutlined, SettingOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons';
 import './setting.scss';
 import { useAuthProvider } from '../../providers/authProvider';
+import { useNotification } from '../../providers/Notification';
 import ConnectWallet from "../connectwallet";
 import ModalEmail from '../modal/Email';
+import userService from '../../services/api/user';
+
 function SettingsPanel() {
-  const { user } = useAuthProvider();
+  const { user,setUser } = useAuthProvider();
+  const notification = useNotification();
   const [email, setEmail] = useState('user@example.com');
-  const [avatar, setAvatar] = useState('null')
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true)
+  const [avatar, setAvatar] = useState(null); // Initialize with null for proper initial display
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [walletAddress, setWalletAddress] = useState('null');
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const fileInputRef = useRef(null);
+
   useEffect(() => {
     setEmail(user?.email || 'user@example.com');
-    setAvatar(user?.avatar)
-    setWalletAddress(user?.address)
-    setNotificationsEnabled(user?.statusNotify)
-  
-  }, [isOpen,user]);
+    // Set avatar from user data, or null if not available
+    setAvatar(user?.avatar || null);
+    setWalletAddress(user?.address);
+    setNotificationsEnabled(user?.statusNotify);
+  }, [isOpen, user]);
 
   const handleAvatarClick = () => {
-    message.info('Avatar update feature coming soon!');
+    fileInputRef.current.click();
   };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setAvatarFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleNotificationsChange = (checked) => {
+    setNotificationsEnabled(checked);
+  };
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(walletAddress);
+    message.success('Copied to clipboard!');
   };
+
   const OpenModal = () => {
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
+
   const CloseModal = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
+
+  const handleSaveChanges = async () => {
+    message.loading('Saving preferences...', 0);
+
+    const formData = new FormData();
+    if (avatarFile) {
+      formData.append('avatar', avatarFile);
+    }
+    formData.append('statusNotify', notificationsEnabled);
+    const result = await userService.updateUser(formData)
+    if(result.success){
+      notification.success({ description: result.message });
+      setUser({
+        ...user,
+        avatar,
+        statusNotify: notificationsEnabled,
+      })
+    }else{
+      notification.error({ description: result.message });
+    }
+  };
 
   return (
     <>
-      <ModalEmail isOpen={isOpen} onClose={CloseModal}/>
+      <ModalEmail isOpen={isOpen} onClose={CloseModal} />
       {user ? (
         <div className="settings-container">
           <Card className="settings-card">
@@ -47,20 +95,27 @@ function SettingsPanel() {
                     className="user-avatar"
                     size={120}
                     icon={<UserOutlined />}
-                    src={avatar}
+                    src={avatar || undefined} // Use avatar state for display
                   />
                   <div className="avatar-overlay">
                     <CameraOutlined className="edit-icon" />
                   </div>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                    accept="image/*"
+                  />
                 </div>
 
                 <div className="user-info">
                   <h2 className="user-email">
                     {email}
                     <Tooltip title="Edit email">
-                      <EditOutlined 
+                      <EditOutlined
                         onClick={OpenModal}
-                        className="edit-action" 
+                        className="edit-action"
                       />
                     </Tooltip>
                   </h2>
@@ -98,7 +153,7 @@ function SettingsPanel() {
                       <MailOutlined className="setting-icon" />
                       <Switch
                         checked={notificationsEnabled}
-                        onChange={setNotificationsEnabled}
+                        onChange={handleNotificationsChange}
                         className="setting-switch"
                       />
                       <span className="setting-label">
@@ -116,6 +171,7 @@ function SettingsPanel() {
                 size="large"
                 icon={<SaveOutlined />}
                 className="save-button"
+                onClick={handleSaveChanges}
               >
                 SAVE PREFERENCES
               </Button>

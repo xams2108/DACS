@@ -21,7 +21,7 @@ const userService = {
     },
     updateUser: async (payload) => {
         try {
-            const data = await postData(`api/user`, payload);
+            const data = await postData(`api/user/changeInfo`, payload);
             return data;
         } catch (error) {
             console.error('Lỗi khi cập nhật thông tin người dùng:', error.message);
